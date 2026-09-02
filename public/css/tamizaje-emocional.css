@@ -1,0 +1,261 @@
+.tamiz-page {
+    padding: 60px 0 100px;
+    background: var(--gray-50);
+    min-height: 100vh;
+}
+
+.tamiz-container {
+    width: min(900px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+.tamiz-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tamiz-header h1 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--sibe-blue);
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom: 10px;
+}
+
+.tamiz-header p {
+    color: var(--gray-500);
+}
+
+.tamiz-alert-success {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    margin-bottom: 25px;
+    background: rgba(25, 135, 84, 0.1);
+    border: 1px solid rgba(25, 135, 84, 0.3);
+    border-radius: 10px;
+    color: var(--sibe-green-dark);
+    font-weight: 600;
+}
+
+/* PROGRESO */
+
+.tamiz-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--gray-200);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.tamiz-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--sibe-green), var(--sibe-purple));
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.tamiz-progress-text {
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    margin-bottom: 25px;
+}
+
+/* SECCIONES */
+
+.tamiz-section {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: 30px;
+    margin-bottom: 25px;
+}
+
+.tamiz-section-header h2 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--sibe-green-dark);
+    font-size: 1.15rem;
+    margin-bottom: 5px;
+}
+
+.tamiz-section-header p {
+    color: var(--gray-500);
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+}
+
+/* PREGUNTAS */
+
+.tamiz-question {
+    padding: 18px 0;
+    border-top: 1px solid var(--gray-100);
+    transition: background 0.2s ease;
+}
+
+.tamiz-question.shake {
+    animation: tamizShake 0.4s ease;
+}
+
+@keyframes tamizShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+}
+
+.tamiz-question-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 14px;
+    color: var(--black);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.tamiz-question-number {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gray-100);
+    border-radius: 50%;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--sibe-purple);
+}
+
+/* OPCIONES */
+
+.tamiz-options {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.tamiz-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 6px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.tamiz-option:hover {
+    background: var(--gray-50);
+}
+
+.tamiz-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.tamiz-radio-circle {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--gray-200);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.tamiz-option.selected .tamiz-radio-circle {
+    border-color: var(--sibe-green);
+    background: var(--sibe-green);
+    box-shadow: 0 0 0 4px rgba(25, 135, 84, 0.15);
+}
+
+.tamiz-option.selected .tamiz-radio-circle::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    background: white;
+    border-radius: 50%;
+}
+
+.tamiz-option-label {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    text-align: center;
+}
+
+.tamiz-option.selected .tamiz-option-label {
+    color: var(--sibe-green-dark);
+    font-weight: 600;
+}
+
+/* ENVÍO */
+
+.tamiz-submit-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.tamiz-warning {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    color: #b45309;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.tamiz-warning.show {
+    display: flex;
+}
+
+.tamiz-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 26px;
+    background: linear-gradient(135deg, var(--sibe-purple), #7137c9);
+    color: white;
+    border: none;
+    border-radius: 11px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.tamiz-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(84, 32, 168, 0.25);
+}
+
+.tamiz-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 640px) {
+
+    .tamiz-options {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+    }
+
+    .tamiz-option-label {
+        font-size: 0.62rem;
+    }
+
+    .tamiz-section {
+        padding: 20px 16px;
+    }
+
+}

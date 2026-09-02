@@ -1,0 +1,2798 @@
+/* =========================================================
+   SIBE - LANDING PAGE
+   Sistema de Bienestar Universitario
+========================================================= */
+
+
+/* =========================================================
+   FUENTES
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+
+/* =========================================================
+   VARIABLES INSTITUCIONALES
+========================================================= */
+
+:root {
+
+    --sibe-green: #087443;
+    --sibe-green-dark: #056238;
+    --sibe-green-light: #eaf7f0;
+
+    --sibe-purple: #5b21b6;
+    --sibe-purple-dark: #46158f;
+    --sibe-purple-light: #f2ecff;
+
+    --sibe-blue: #193b73;
+    --sibe-blue-light: #edf3fb;
+
+    --sibe-orange: #f59e0b;
+    --sibe-red: #c9362c;
+
+    --sibe-text: #172033;
+    --sibe-text-soft: #64748b;
+
+    --sibe-background: #f8fafc;
+
+    --sibe-white: #ffffff;
+
+    --sibe-border: #e5e7eb;
+
+    --sibe-shadow:
+        0 15px 45px rgba(15, 23, 42, 0.08);
+
+    --sibe-shadow-hover:
+        0 25px 60px rgba(15, 23, 42, 0.13);
+
+}
+
+
+/* =========================================================
+   BASE
+========================================================= */
+
+.sibe-navbar,
+.sibe-hero,
+.sibe-services,
+.sibe-tools,
+.sibe-violentometro,
+.sibe-cta,
+.sibe-footer {
+
+    font-family: 'Inter', sans-serif;
+
+}
+
+
+.sibe-navbar *,
+.sibe-hero *,
+.sibe-services *,
+.sibe-tools *,
+.sibe-violentometro *,
+.sibe-cta *,
+.sibe-footer * {
+
+    box-sizing: border-box;
+
+}
+
+
+.sibe-navbar a,
+.sibe-hero a,
+.sibe-services a,
+.sibe-tools a,
+.sibe-violentometro a,
+.sibe-cta a,
+.sibe-footer a {
+
+    text-decoration: none;
+
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.sibe-navbar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    z-index: 9999;
+
+    background:
+        rgba(255, 255, 255, 0.92);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    border-bottom:
+        1px solid rgba(226, 232, 240, 0.7);
+
+    transition:
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+
+}
+
+
+.sibe-navbar.scrolled {
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    box-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.07);
+
+}
+
+
+.sibe-navbar-container {
+
+    width: min(1400px, calc(100% - 60px));
+
+    height: 82px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+}
+
+
+.sibe-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+}
+
+
+.sibe-logo img {
+
+    width: 175px;
+
+    height: auto;
+
+    display: block;
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.sibe-nav-menu {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 36px;
+
+}
+
+
+.sibe-nav-link {
+
+    position: relative;
+
+    padding: 8px 0;
+
+    color: #475569;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        color 0.25s ease;
+
+}
+
+
+.sibe-nav-link::after {
+
+    content: '';
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 0;
+
+    width: 0;
+
+    height: 2px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--sibe-green),
+            var(--sibe-purple)
+        );
+
+    transform:
+        translateX(-50%);
+
+    transition:
+        width 0.3s ease;
+
+}
+
+
+.sibe-nav-link:hover,
+.sibe-nav-link.active {
+
+    color: var(--sibe-purple);
+
+}
+
+
+.sibe-nav-link:hover::after,
+.sibe-nav-link.active::after {
+
+    width: 100%;
+
+}
+
+
+/* =========================================================
+   NAV ACTIONS
+========================================================= */
+
+.sibe-navbar-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.sibe-login-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 19px;
+
+    border-radius: 9px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--sibe-purple),
+            #6d28d9
+        );
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 6px 18px
+        rgba(91, 33, 182, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.sibe-login-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(91, 33, 182, 0.25);
+
+}
+
+
+.sibe-login-button i {
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+
+.sibe-login-button:hover i {
+
+    transform:
+        translateX(3px);
+
+}
+
+
+.sibe-menu-button {
+
+    display: none;
+
+    width: 42px;
+
+    height: 42px;
+
+    border: 1px solid var(--sibe-border);
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: var(--sibe-text);
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.sibe-hero {
+
+    min-height: 760px;
+
+    padding:
+        145px 30px 90px;
+
+    background:
+
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(91, 33, 182, 0.07),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 10% 80%,
+            rgba(8, 116, 67, 0.07),
+            transparent 25%
+        ),
+
+        #ffffff;
+
+    overflow: hidden;
+
+}
+
+
+.sibe-hero-container {
+
+    width: min(1400px, 100%);
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(450px, 0.9fr);
+
+    align-items: center;
+
+    gap: 70px;
+
+}
+
+
+.sibe-hero-content {
+
+    position: relative;
+
+    z-index: 5;
+
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.sibe-eyebrow {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        8px 14px;
+
+    border:
+        1px solid #e8e3f4;
+
+    border-radius: 100px;
+
+    background:
+        rgba(255, 255, 255, 0.9);
+
+    color:
+        var(--sibe-purple);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+}
+
+
+.sibe-eyebrow span {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background:
+        var(--sibe-green);
+
+    box-shadow:
+        0 0 0 5px
+        rgba(8, 116, 67, 0.08);
+
+}
+
+
+/* =========================================================
+   HERO TYPOGRAPHY
+========================================================= */
+
+.sibe-hero h1 {
+
+    max-width: 760px;
+
+    margin:
+        25px 0 22px;
+
+    color:
+        var(--sibe-text);
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    font-size:
+        clamp(44px, 5.3vw, 72px);
+
+    font-weight: 700;
+
+    line-height: 1.08;
+
+    letter-spacing: -2.5px;
+
+}
+
+
+.sibe-hero h1 span {
+
+    display: block;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--sibe-green),
+            var(--sibe-purple)
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+}
+
+
+.sibe-hero-content > p {
+
+    max-width: 610px;
+
+    margin: 0;
+
+    color:
+        var(--sibe-text-soft);
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
+
+.sibe-hero-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 13px;
+
+    margin-top: 34px;
+
+}
+
+
+.sibe-primary-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 11px;
+
+    min-height: 48px;
+
+    padding:
+        0 21px;
+
+    border-radius: 9px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--sibe-purple),
+            #6d28d9
+        );
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 10px 25px
+        rgba(91, 33, 182, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.sibe-primary-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 16px 32px
+        rgba(91, 33, 182, 0.25);
+
+}
+
+
+.sibe-primary-button i {
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+
+.sibe-primary-button:hover i {
+
+    transform:
+        translateX(4px);
+
+}
+
+
+.sibe-secondary-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 48px;
+
+    padding:
+        0 21px;
+
+    border:
+        1px solid var(--sibe-border);
+
+    border-radius: 9px;
+
+    background: white;
+
+    color:
+        var(--sibe-text);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+
+}
+
+
+.sibe-secondary-button:hover {
+
+    border-color:
+        rgba(91, 33, 182, 0.35);
+
+    color:
+        var(--sibe-purple);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   HERO FEATURES
+========================================================= */
+
+.sibe-hero-features {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+
+    margin-top: 50px;
+
+}
+
+
+.sibe-feature {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+}
+
+
+.sibe-feature-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 11px;
+
+}
+
+
+.sibe-feature-icon.purple {
+
+    color:
+        var(--sibe-purple);
+
+    background:
+        var(--sibe-purple-light);
+
+}
+
+
+.sibe-feature-icon.green {
+
+    color:
+        var(--sibe-green);
+
+    background:
+        var(--sibe-green-light);
+
+}
+
+
+.sibe-feature strong {
+
+    display: block;
+
+    color:
+        var(--sibe-text);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.sibe-feature span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        var(--sibe-text-soft);
+
+    font-size: 10px;
+
+}
+
+
+.sibe-feature-separator {
+
+    width: 1px;
+
+    height: 35px;
+
+    background:
+        var(--sibe-border);
+
+}
+
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.sibe-hero-image-wrapper {
+
+    position: relative;
+
+    min-height: 560px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.sibe-hero-image-container {
+
+    position: relative;
+
+    z-index: 3;
+
+    width: min(580px, 100%);
+
+}
+
+
+.sibe-hero-image {
+
+    width: 100%;
+
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 25px 35px
+            rgba(15, 23, 42, 0.12)
+        );
+
+    animation:
+        sibeHeroFloat 5s
+        ease-in-out infinite;
+
+}
+
+
+@keyframes sibeHeroFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-8px);
+
+    }
+
+}
+
+
+/* =========================================================
+   DECORATIONS
+========================================================= */
+
+.sibe-hero-decoration {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+}
+
+
+.decoration-one {
+
+    width: 410px;
+
+    height: 410px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8, 116, 67, 0.09),
+            rgba(91, 33, 182, 0.10)
+        );
+
+    z-index: 1;
+
+}
+
+
+.decoration-two {
+
+    width: 470px;
+
+    height: 470px;
+
+    border:
+        1px solid
+        rgba(91, 33, 182, 0.10);
+
+    z-index: 0;
+
+}
+
+
+/* =========================================================
+   FLOATING CARDS
+========================================================= */
+
+.sibe-floating-card {
+
+    position: absolute;
+
+    z-index: 10;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    min-width: 215px;
+
+    padding:
+        12px 14px;
+
+    border:
+        1px solid
+        rgba(226, 232, 240, 0.8);
+
+    border-radius: 13px;
+
+    background:
+        rgba(255, 255, 255, 0.95);
+
+    box-shadow:
+        0 15px 35px
+        rgba(15, 23, 42, 0.10);
+
+    backdrop-filter:
+        blur(12px);
+
+    animation:
+        sibeCardFloat 4.5s
+        ease-in-out infinite;
+
+}
+
+
+.floating-top {
+
+    top: 95px;
+
+    right: -20px;
+
+}
+
+
+.floating-bottom {
+
+    bottom: 95px;
+
+    left: -30px;
+
+    animation-delay:
+        1.5s;
+
+}
+
+
+.sibe-floating-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 10px;
+
+}
+
+
+.sibe-floating-icon.purple {
+
+    background:
+        var(--sibe-purple-light);
+
+    color:
+        var(--sibe-purple);
+
+}
+
+
+.sibe-floating-icon.green {
+
+    background:
+        var(--sibe-green-light);
+
+    color:
+        var(--sibe-green);
+
+}
+
+
+.sibe-floating-card strong {
+
+    display: block;
+
+    color:
+        var(--sibe-text);
+
+    font-size: 11px;
+
+}
+
+
+.sibe-floating-card span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        var(--sibe-text-soft);
+
+    font-size: 9px;
+
+}
+
+
+@keyframes sibeCardFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-10px);
+
+    }
+
+}
+
+
+/* =========================================================
+   SECTIONS GENERAL
+========================================================= */
+
+.sibe-section-container {
+
+    width:
+        min(1400px, calc(100% - 60px));
+
+    margin:
+        auto;
+
+}
+
+
+.sibe-section-heading {
+
+    max-width: 720px;
+
+    margin-bottom: 55px;
+
+}
+
+
+.sibe-section-heading.centered {
+
+    margin-left: auto;
+
+    margin-right: auto;
+
+    text-align: center;
+
+}
+
+
+.sibe-section-label {
+
+    display: inline-block;
+
+    color:
+        var(--sibe-purple);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+
+}
+
+
+.sibe-section-heading h2 {
+
+    margin:
+        13px 0 14px;
+
+    color:
+        var(--sibe-text);
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    font-size:
+        clamp(30px, 4vw, 48px);
+
+    line-height: 1.15;
+
+    letter-spacing:
+        -1px;
+
+}
+
+
+.sibe-section-heading p {
+
+    margin: 0;
+
+    color:
+        var(--sibe-text-soft);
+
+    font-size: 15px;
+
+    line-height: 1.75;
+
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.sibe-services {
+
+    padding:
+        110px 30px;
+
+    background:
+        #ffffff;
+
+}
+
+
+.sibe-services-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 17px;
+
+}
+
+
+.sibe-service-card {
+
+    min-height: 310px;
+
+    padding:
+        27px 23px;
+
+    border:
+        1px solid var(--sibe-border);
+
+    border-radius: 17px;
+
+    background:
+        #ffffff;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+
+}
+
+
+.sibe-service-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    border-color:
+        rgba(91, 33, 182, 0.20);
+
+    box-shadow:
+        var(--sibe-shadow-hover);
+
+}
+
+
+.sibe-service-icon {
+
+    width: 51px;
+
+    height: 51px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 13px;
+
+    font-size: 19px;
+
+    transition:
+        transform 0.3s ease;
+
+}
+
+
+.sibe-service-card:hover
+.sibe-service-icon {
+
+    transform:
+        scale(1.08)
+        rotate(-3deg);
+
+}
+
+
+.sibe-service-icon.purple {
+
+    background:
+        var(--sibe-purple-light);
+
+    color:
+        var(--sibe-purple);
+
+}
+
+
+.sibe-service-icon.blue {
+
+    background:
+        var(--sibe-blue-light);
+
+    color:
+        var(--sibe-blue);
+
+}
+
+
+.sibe-service-icon.green {
+
+    background:
+        var(--sibe-green-light);
+
+    color:
+        var(--sibe-green);
+
+}
+
+
+.sibe-service-icon.pink {
+
+    background:
+        #fff0f5;
+
+    color:
+        #d62972;
+
+}
+
+
+.sibe-service-icon.orange {
+
+    background:
+        #fff6e7;
+
+    color:
+        #df7900;
+
+}
+
+
+.sibe-service-card h3 {
+
+    margin:
+        24px 0 10px;
+
+    color:
+        var(--sibe-text);
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    font-size: 17px;
+
+}
+
+
+.sibe-service-card p {
+
+    min-height: 88px;
+
+    margin: 0;
+
+    color:
+        var(--sibe-text-soft);
+
+    font-size: 12px;
+
+    line-height: 1.65;
+
+}
+
+
+.sibe-service-card a {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 17px;
+
+    color:
+        var(--sibe-purple);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.sibe-service-card a i {
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+
+.sibe-service-card:hover a i {
+
+    transform:
+        translateX(4px);
+
+}
+
+
+/* =========================================================
+   TOOLS
+========================================================= */
+
+.sibe-tools {
+
+    padding:
+        115px 30px;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            #f8fafc 0%,
+            #f7f3ff 100%
+        );
+
+}
+
+
+.sibe-tools-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 22px;
+
+}
+
+
+.sibe-tool-card {
+
+    position: relative;
+
+    min-height: 390px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding:
+        30px;
+
+    overflow: hidden;
+
+    border:
+        1px solid var(--sibe-border);
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.92);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+
+}
+
+
+.sibe-tool-card::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    height: 4px;
+
+    background:
+        var(--sibe-purple);
+
+}
+
+
+.sibe-tool-card.violence::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--sibe-green),
+            var(--sibe-purple)
+        );
+
+}
+
+
+.sibe-tool-card.emotional::before {
+
+    background:
+        var(--sibe-purple);
+
+}
+
+
+.sibe-tool-card.academic::before {
+
+    background:
+        var(--sibe-blue);
+
+}
+
+
+.sibe-tool-card:hover {
+
+    transform:
+        translateY(-9px);
+
+    box-shadow:
+        var(--sibe-shadow-hover);
+
+}
+
+
+.sibe-tool-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.sibe-tool-number {
+
+    color:
+        #94a3b8;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.sibe-tool-icon {
+
+    width: 57px;
+
+    height: 57px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 15px;
+
+    background:
+        var(--sibe-purple-light);
+
+    color:
+        var(--sibe-purple);
+
+    font-size: 22px;
+
+}
+
+
+.sibe-tool-card.violence
+.sibe-tool-icon {
+
+    background:
+        var(--sibe-green-light);
+
+    color:
+        var(--sibe-green);
+
+}
+
+
+.sibe-tool-card.academic
+.sibe-tool-icon {
+
+    background:
+        var(--sibe-blue-light);
+
+    color:
+        var(--sibe-blue);
+
+}
+
+
+.sibe-tool-content {
+
+    margin-top: 45px;
+
+}
+
+
+.sibe-tool-category {
+
+    color:
+        var(--sibe-text-soft);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.sibe-tool-content h3 {
+
+    margin:
+        10px 0 12px;
+
+    color:
+        var(--sibe-text);
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    font-size: 24px;
+
+}
+
+
+.sibe-tool-content p {
+
+    margin: 0;
+
+    color:
+        var(--sibe-text-soft);
+
+    font-size: 13px;
+
+    line-height: 1.75;
+
+}
+
+
+.sibe-tool-button {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: auto;
+
+    padding-top: 28px;
+
+    color:
+        var(--sibe-purple);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.sibe-tool-button i {
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+
+.sibe-tool-button:hover i {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.sibe-tools-note {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 30px;
+
+    padding:
+        17px 20px;
+
+    border:
+        1px solid
+        #e5ddf5;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,0.75);
+
+}
+
+
+.sibe-tools-note > i {
+
+    color:
+        var(--sibe-purple);
+
+    font-size: 17px;
+
+}
+
+
+.sibe-tools-note p {
+
+    flex: 1;
+
+    margin: 0;
+
+    color:
+        var(--sibe-text-soft);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+}
+
+
+.sibe-tools-note a {
+
+    color:
+        var(--sibe-purple);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   VIOLENTÓMETRO
+========================================================= */
+
+.sibe-violentometro {
+
+    padding:
+        115px 30px;
+
+    background:
+        #ffffff;
+
+}
+
+
+.sibe-violentometro-container {
+
+    width:
+        min(1200px, 100%);
+
+    margin:
+        auto;
+
+    display: grid;
+
+    grid-template-columns:
+        0.9fr 1.1fr;
+
+    align-items: center;
+
+    gap: 80px;
+
+}
+
+
+.sibe-violentometro-content h2 {
+
+    max-width: 600px;
+
+    margin:
+        14px 0 20px;
+
+    color:
+        var(--sibe-text);
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    font-size:
+        clamp(32px, 4vw, 50px);
+
+    line-height: 1.13;
+
+    letter-spacing:
+        -1px;
+
+}
+
+
+.sibe-violentometro-content p {
+
+    max-width: 550px;
+
+    margin: 0;
+
+    color:
+        var(--sibe-text-soft);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+}
+
+
+.sibe-violentometro-actions {
+
+    margin-top: 30px;
+
+}
+
+
+/* =========================================================
+   VIOLENTÓMETRO IMAGE
+========================================================= */
+
+.sibe-violentometro-image {
+
+    position: relative;
+
+    min-height: 470px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.sibe-violentometro-image img {
+
+    position: relative;
+
+    z-index: 2;
+
+    width:
+        min(430px, 90%);
+
+    max-height: 500px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 20px 25px
+            rgba(15,23,42,0.13)
+        );
+
+    transition:
+        transform 0.5s ease;
+
+}
+
+
+.sibe-violentometro-image:hover img {
+
+    transform:
+        translateY(-8px)
+        scale(1.02);
+
+}
+
+
+.sibe-violentometro-glow {
+
+    position: absolute;
+
+    width: 360px;
+
+    height: 360px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(245,158,11,0.15),
+            transparent 65%
+        );
+
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.sibe-cta {
+
+    padding:
+        80px 30px;
+
+    background:
+        linear-gradient(
+            120deg,
+            var(--sibe-green),
+            var(--sibe-purple)
+        );
+
+}
+
+
+.sibe-cta-container {
+
+    width:
+        min(1200px, 100%);
+
+    margin:
+        auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 50px;
+
+}
+
+
+.sibe-cta-label {
+
+    color:
+        rgba(255,255,255,0.75);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+
+}
+
+
+.sibe-cta h2 {
+
+    max-width: 700px;
+
+    margin:
+        12px 0;
+
+    color:
+        white;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    font-size:
+        clamp(29px, 4vw, 44px);
+
+    line-height: 1.15;
+
+}
+
+
+.sibe-cta p {
+
+    margin: 0;
+
+    color:
+        rgba(255,255,255,0.8);
+
+    font-size: 13px;
+
+}
+
+
+.sibe-cta-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        14px 23px;
+
+    border-radius: 10px;
+
+    background:
+        white;
+
+    color:
+        var(--sibe-purple);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.sibe-cta-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 15px 30px
+        rgba(0,0,0,0.18);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.sibe-footer {
+
+    padding:
+        65px 30px 25px;
+
+    background:
+        #111827;
+
+}
+
+
+.sibe-footer-container {
+
+    width:
+        min(1200px, 100%);
+
+    margin:
+        auto;
+
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr 1fr;
+
+    gap: 80px;
+
+}
+
+
+.sibe-footer-brand img {
+
+    width: 175px;
+
+    padding: 8px;
+
+    border-radius: 8px;
+
+    background: white;
+
+}
+
+
+.sibe-footer-brand p {
+
+    max-width: 360px;
+
+    margin:
+        18px 0 0;
+
+    color:
+        #94a3b8;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+
+}
+
+
+.sibe-footer-column {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+
+}
+
+
+.sibe-footer-column h4 {
+
+    margin:
+        0 0 8px;
+
+    color:
+        white;
+
+    font-size: 13px;
+
+}
+
+
+.sibe-footer-column a {
+
+    color:
+        #94a3b8;
+
+    font-size: 12px;
+
+    transition:
+        color 0.25s ease;
+
+}
+
+
+.sibe-footer-column a:hover {
+
+    color:
+        white;
+
+}
+
+
+.sibe-footer-bottom {
+
+    width:
+        min(1200px, 100%);
+
+    margin:
+        55px auto 0;
+
+    padding-top:
+        20px;
+
+    border-top:
+        1px solid #263244;
+
+}
+
+
+.sibe-footer-bottom p {
+
+    margin: 0;
+
+    color:
+        #64748b;
+
+    font-size: 10px;
+
+}
+
+
+/* =========================================================
+   ANIMACIONES DE ENTRADA
+========================================================= */
+
+.sibe-reveal {
+
+    opacity: 0;
+
+    transform:
+        translateY(25px);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s ease;
+
+}
+
+
+.sibe-reveal.visible {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .sibe-navbar-container {
+
+        width:
+            min(100% - 40px, 1000px);
+
+    }
+
+
+    .sibe-nav-menu {
+
+        gap: 22px;
+
+    }
+
+
+    .sibe-hero-container {
+
+        grid-template-columns:
+            1fr;
+
+        text-align: center;
+
+    }
+
+
+    .sibe-hero-content > p {
+
+        margin:
+            auto;
+
+    }
+
+
+    .sibe-hero-actions {
+
+        justify-content:
+            center;
+
+    }
+
+
+    .sibe-hero-features {
+
+        justify-content:
+            center;
+
+    }
+
+
+    .sibe-hero-image-wrapper {
+
+        min-height:
+            500px;
+
+    }
+
+
+    .sibe-services-grid {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+    }
+
+
+    .sibe-tools-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .sibe-tool-card {
+
+        min-height:
+            330px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .sibe-navbar-container {
+
+        width:
+            calc(100% - 30px);
+
+        height:
+            70px;
+
+    }
+
+
+    .sibe-logo img {
+
+        width:
+            145px;
+
+    }
+
+
+    .sibe-nav-menu {
+
+        position: absolute;
+
+        top: 70px;
+
+        left: 15px;
+
+        right: 15px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 0;
+
+        padding: 12px;
+
+        border:
+            1px solid var(--sibe-border);
+
+        border-radius: 14px;
+
+        background:
+            rgba(255,255,255,0.98);
+
+        box-shadow:
+            0 20px 40px
+            rgba(15,23,42,0.12);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transform:
+            translateY(-10px);
+
+        transition:
+            all 0.25s ease;
+
+    }
+
+
+    .sibe-nav-menu.show {
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform:
+            translateY(0);
+
+    }
+
+
+    .sibe-nav-link {
+
+        padding:
+            13px;
+
+        border-radius: 8px;
+
+    }
+
+
+    .sibe-nav-link:hover {
+
+        background:
+            var(--sibe-purple-light);
+
+    }
+
+
+    .sibe-nav-link::after {
+
+        display: none;
+
+    }
+
+
+    .sibe-login-button {
+
+        display: none;
+
+    }
+
+
+    .sibe-menu-button {
+
+        display: grid;
+
+        place-items: center;
+
+    }
+
+
+    .sibe-hero {
+
+        min-height:
+            auto;
+
+        padding:
+            120px 20px 65px;
+
+    }
+
+
+    .sibe-hero-container {
+
+        gap:
+            35px;
+
+    }
+
+
+    .sibe-hero h1 {
+
+        margin-top:
+            20px;
+
+        font-size:
+            clamp(38px, 11vw, 55px);
+
+        letter-spacing:
+            -1.8px;
+
+    }
+
+
+    .sibe-hero-content > p {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .sibe-hero-actions {
+
+        flex-direction:
+            column;
+
+        align-items:
+            stretch;
+
+    }
+
+
+    .sibe-primary-button,
+    .sibe-secondary-button {
+
+        width:
+            100%;
+
+    }
+
+
+    .sibe-hero-features {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+        gap:
+            18px;
+
+        margin-top:
+            35px;
+
+    }
+
+
+    .sibe-feature-separator {
+
+        width:
+            100%;
+
+        height:
+            1px;
+
+    }
+
+
+    .sibe-hero-image-wrapper {
+
+        min-height:
+            350px;
+
+    }
+
+
+    .sibe-hero-image-container {
+
+        width:
+            100%;
+
+    }
+
+
+    .decoration-one {
+
+        width:
+            290px;
+
+        height:
+            290px;
+
+    }
+
+
+    .decoration-two {
+
+        width:
+            340px;
+
+        height:
+            340px;
+
+    }
+
+
+    .sibe-floating-card {
+
+        min-width:
+            170px;
+
+        padding:
+            9px;
+
+    }
+
+
+    .floating-top {
+
+        top:
+            20px;
+
+        right:
+            -3px;
+
+    }
+
+
+    .floating-bottom {
+
+        bottom:
+            20px;
+
+        left:
+            -3px;
+
+    }
+
+
+    .sibe-section-container {
+
+        width:
+            calc(100% - 30px);
+
+    }
+
+
+    .sibe-services,
+    .sibe-tools,
+    .sibe-violentometro {
+
+        padding:
+            75px 15px;
+
+    }
+
+
+    .sibe-services-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .sibe-service-card {
+
+        min-height:
+            auto;
+
+    }
+
+
+    .sibe-service-card p {
+
+        min-height:
+            auto;
+
+    }
+
+
+    .sibe-violentometro-container {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            30px;
+
+    }
+
+
+    .sibe-violentometro-content {
+
+        text-align:
+            center;
+
+    }
+
+
+    .sibe-violentometro-content p {
+
+        margin:
+            auto;
+
+    }
+
+
+    .sibe-violentometro-actions {
+
+        display:
+            flex;
+
+        justify-content:
+            center;
+
+    }
+
+
+    .sibe-violentometro-image {
+
+        min-height:
+            380px;
+
+    }
+
+
+    .sibe-violentometro-image img {
+
+        width:
+            min(330px, 90%);
+
+    }
+
+
+    .sibe-cta {
+
+        padding:
+            60px 20px;
+
+    }
+
+
+    .sibe-cta-container {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .sibe-cta-button {
+
+        width:
+            100%;
+
+        justify-content:
+            center;
+
+    }
+
+
+    .sibe-footer {
+
+        padding:
+            55px 20px 20px;
+
+    }
+
+
+    .sibe-footer-container {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            40px;
+
+    }
+
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .sibe-eyebrow {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .sibe-hero h1 {
+
+        font-size:
+            37px;
+
+    }
+
+
+    .sibe-floating-card {
+
+        transform:
+            scale(0.85);
+
+    }
+
+
+    .floating-top {
+
+        right:
+            -25px;
+
+    }
+
+
+    .floating-bottom {
+
+        left:
+            -25px;
+
+    }
+
+
+    .sibe-section-heading h2 {
+
+        font-size:
+            31px;
+
+    }
+
+
+    .sibe-tool-card {
+
+        padding:
+            25px;
+
+    }
+
+
+    .sibe-tools-note {
+
+        align-items:
+            flex-start;
+
+        flex-wrap:
+            wrap;
+
+    }
+
+
+    .sibe-tools-note a {
+
+        width:
+            100%;
+
+        padding-left:
+            32px;
+
+    }
+
+}
+
+
+/* =========================================================
+   ACCESIBILIDAD
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .sibe-hero-image,
+    .sibe-floating-card {
+
+        animation:
+            none;
+
+    }
+
+
+    .sibe-reveal {
+
+        opacity:
+            1;
+
+        transform:
+            none;
+
+        transition:
+            none;
+
+    }
+
+}

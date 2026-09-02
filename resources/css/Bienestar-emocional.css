@@ -1,0 +1,663 @@
+.bienestar-page {
+    padding: 60px 0 100px;
+    background: var(--gray-50);
+    min-height: 100vh;
+}
+
+.bienestar-container {
+    width: min(900px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+.bienestar-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.bienestar-eyebrow {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: var(--sibe-green);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.bienestar-header h1 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--sibe-blue);
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom: 10px;
+}
+
+.bienestar-header p {
+    color: var(--gray-500);
+}
+
+/* PROGRESO */
+
+.bienestar-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--gray-200);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.bienestar-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--sibe-green), #2563eb);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+.bienestar-progress-text {
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    margin-bottom: 20px;
+}
+
+/* INTRODUCCIÓN */
+
+.bienestar-intro-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.bienestar-intro-card {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 34px;
+}
+
+.bienestar-intro-card p {
+    color: var(--gray-700);
+    font-size: 0.92rem;
+    line-height: 1.75;
+    margin-bottom: 14px;
+}
+
+.bienestar-intro-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+    margin-bottom: 24px;
+    background: #eaf7f0;
+    border: 1px solid #bfe6cf;
+    border-radius: 12px;
+}
+
+.bienestar-intro-warning i {
+    color: var(--sibe-green-dark);
+    font-size: 1.1rem;
+    margin-top: 2px;
+}
+
+.bienestar-intro-warning strong {
+    display: block;
+    color: var(--sibe-green-dark);
+    font-size: 0.92rem;
+    margin-bottom: 3px;
+}
+
+.bienestar-intro-warning p {
+    margin: 0;
+    color: #056238;
+    font-size: 0.85rem;
+}
+
+.bienestar-intro-consent {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-100);
+}
+
+.bienestar-intro-consent label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray-700);
+    cursor: pointer;
+}
+
+.bienestar-intro-safe-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+    padding: 34px 26px;
+    background: linear-gradient(160deg, rgba(25,135,84,0.06), rgba(37,99,235,0.05));
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+}
+
+.bienestar-intro-safe-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: white;
+    box-shadow: var(--shadow-sm);
+    color: var(--sibe-green);
+    font-size: 1.6rem;
+}
+
+.bienestar-intro-safe-card h3 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--sibe-blue);
+    font-size: 1.05rem;
+}
+
+.bienestar-intro-safe-card p {
+    color: var(--gray-500);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.bienestar-intro-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 22px;
+}
+
+/* BOTONES */
+
+.bienestar-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 26px;
+    background: linear-gradient(135deg, var(--sibe-green), var(--sibe-green-dark));
+    color: white;
+    border: none;
+    border-radius: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.bienestar-btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(25, 135, 84, 0.25);
+}
+
+.bienestar-btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.bienestar-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 11px;
+    color: var(--sibe-blue);
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.bienestar-btn-secondary:hover {
+    border-color: var(--sibe-green);
+    color: var(--sibe-green-dark);
+}
+
+/* DIMENSIONES Y PREGUNTAS */
+
+.bienestar-dimension {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: 26px 30px;
+    margin-bottom: 20px;
+}
+
+.bienestar-dimension h3 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--sibe-green-dark);
+    font-size: 1.05rem;
+    margin-bottom: 5px;
+}
+
+.bienestar-dimension-desc {
+    color: var(--gray-500);
+    font-size: 0.85rem;
+    margin-bottom: 18px;
+}
+
+.bienestar-question {
+    padding: 16px 0;
+    border-top: 1px solid var(--gray-100);
+}
+
+.bienestar-question:first-of-type {
+    border-top: none;
+}
+
+.bienestar-question-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 14px;
+    color: var(--black);
+    font-size: 0.92rem;
+    font-weight: 500;
+}
+
+.bienestar-question-number {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gray-100);
+    border-radius: 50%;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--sibe-green-dark);
+}
+
+.bienestar-options {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+}
+
+.bienestar-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 4px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.bienestar-option:hover {
+    background: var(--gray-50);
+}
+
+.bienestar-option input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.bienestar-radio-circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gray-200);
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.bienestar-option.selected .bienestar-radio-circle {
+    border-color: var(--sibe-green);
+    background: var(--sibe-green);
+    box-shadow: 0 0 0 4px rgba(25, 135, 84, 0.15);
+}
+
+.bienestar-option.selected .bienestar-radio-circle::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    background: white;
+    border-radius: 50%;
+}
+
+.bienestar-option-label {
+    font-size: 0.68rem;
+    color: var(--gray-500);
+    text-align: center;
+}
+
+.bienestar-option.selected .bienestar-option-label {
+    color: var(--sibe-green-dark);
+    font-weight: 600;
+}
+
+/* ENVÍO */
+
+.bienestar-submit-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.bienestar-warning {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    color: #b45309;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.bienestar-warning.show {
+    display: flex;
+}
+
+/* RESULTADO */
+
+.bienestar-result-card {
+    position: relative;
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 40px;
+    border-top: 6px solid var(--gray-200);
+
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    align-items: start;
+    gap: 40px;
+}
+
+.bienestar-result-card.nivel-verde     { border-top-color: #198754; }
+.bienestar-result-card.nivel-azul      { border-top-color: #2563eb; }
+.bienestar-result-card.nivel-amarillo  { border-top-color: #f59e0b; }
+.bienestar-result-card.nivel-naranja   { border-top-color: #ea580c; }
+
+@media (max-width: 800px) {
+    .bienestar-result-card {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bienestar-sound-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--gray-200);
+    background: white;
+    border-radius: 50%;
+    color: var(--gray-500);
+    cursor: pointer;
+    z-index: 5;
+    transition: var(--transition);
+}
+
+.bienestar-sound-toggle:hover {
+    color: var(--sibe-green-dark);
+    border-color: var(--sibe-green);
+}
+
+/* TERMÓMETRO */
+
+.bienestar-thermo-section {
+    text-align: center;
+    padding: 10px 0;
+    position: sticky;
+    top: 20px;
+}
+
+.bienestar-thermo-caption {
+    color: var(--gray-500);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    min-height: 20px;
+}
+
+.bienestar-thermo-wrap {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 12px;
+}
+
+.bienestar-thermo-marks {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    height: 300px;
+    padding-bottom: 34px;
+}
+
+.bienestar-thermo-marks .mark {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--gray-500);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+    transform: scale(0.9);
+}
+
+.bienestar-thermo-marks .mark.reached {
+    opacity: 1;
+    color: var(--sibe-green-dark);
+    transform: scale(1.1);
+}
+
+.bienestar-thermo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bienestar-thermo-tube {
+    position: relative;
+    width: 42px;
+    height: 300px;
+    border-radius: 24px 24px 6px 6px;
+    overflow: hidden;
+    background: linear-gradient(
+        to top,
+        #198754 0%,
+        #198754 24%,
+        #2563eb 25%,
+        #2563eb 50%,
+        #f59e0b 51%,
+        #f59e0b 76%,
+        #ea580c 77%,
+        #ea580c 100%
+    );
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.15);
+    border: 3px solid white;
+    outline: 1px solid var(--gray-200);
+}
+
+.bienestar-thermo-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gray-100);
+}
+
+.bienestar-thermo-bulb {
+    --bulb-color: #198754;
+    width: 66px;
+    height: 66px;
+    margin-top: -16px;
+    border-radius: 50%;
+    background: var(--gray-100);
+    border: 3px solid white;
+    outline: 1px solid var(--gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.4s ease;
+    z-index: 1;
+}
+
+.bienestar-thermo-bulb-inner {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bulb-color);
+    opacity: 0.35;
+    transition: opacity 0.4s ease;
+}
+
+.bienestar-thermo-bulb.activo {
+    background: var(--bulb-color);
+    animation: bienestarPulse 1.4s ease-in-out infinite;
+}
+
+.bienestar-thermo-bulb.activo .bienestar-thermo-bulb-inner {
+    opacity: 1;
+    background: white;
+    mix-blend-mode: overlay;
+}
+
+@keyframes bienestarPulse {
+    0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--bulb-color) 45%, transparent); }
+    50%      { box-shadow: 0 0 0 14px color-mix(in srgb, var(--bulb-color) 0%, transparent); }
+}
+
+/* DETALLE — oculto hasta terminar la animación */
+
+.bienestar-result-details {
+    opacity: 0;
+    transform: translateY(15px);
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.bienestar-result-details.visible {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: none;
+    overflow: visible;
+}
+
+.bienestar-result-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 50px;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+}
+
+.nivel-verde .bienestar-result-badge    { background: #eaf7f0; color: #056238; }
+.nivel-azul .bienestar-result-badge     { background: #dbeafe; color: #1e40af; }
+.nivel-amarillo .bienestar-result-badge { background: #fef3c7; color: #92400e; }
+.nivel-naranja .bienestar-result-badge  { background: #ffedd5; color: #9a3412; }
+
+.bienestar-result-card h2 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--sibe-blue);
+    margin-bottom: 12px;
+}
+
+.bienestar-result-box {
+    background: var(--gray-50);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 18px 0;
+}
+
+.bienestar-result-box h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--sibe-green-dark);
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.bienestar-result-box ul {
+    padding-left: 20px;
+    color: var(--gray-700);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.bienestar-resources {
+    margin: 25px 0;
+}
+
+.bienestar-resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.bienestar-resource-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    color: var(--sibe-blue);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.bienestar-resource-btn:hover {
+    border-color: var(--sibe-green);
+    color: var(--sibe-green-dark);
+}
+
+.bienestar-disclaimer {
+    margin-top: 25px;
+    font-size: 0.78rem;
+    color: var(--gray-500);
+    text-align: center;
+    border-top: 1px solid var(--gray-100);
+    padding-top: 15px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+
+    .bienestar-intro-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bienestar-dimension, .bienestar-result-card {
+        padding: 22px 18px;
+    }
+
+    .bienestar-options {
+        gap: 3px;
+    }
+
+    .bienestar-option-label {
+        font-size: 0.58rem;
+    }
+
+    
+
+}

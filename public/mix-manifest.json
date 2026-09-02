@@ -1,0 +1,14 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/js/violentometro.js": "/js/violentometro.js",
+    "/js/Bienestar-emocional.js": "/js/Bienestar-emocional.js",
+    "/js/carga-academica.js": "/js/carga-academica.js",
+    "/js/login.js": "/js/login.js",
+    "/js/admin.js": "/js/admin.js",
+    "/css/login.css": "/css/login.css",
+    "/css/carga-academica.css": "/css/carga-academica.css",
+    "/css/Bienestar-emocional.css": "/css/Bienestar-emocional.css",
+    "/css/violentometro.css": "/css/violentometro.css",
+    "/css/app.css": "/css/app.css",
+    "/css/admin.css": "/css/admin.css"
+}

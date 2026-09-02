@@ -1,0 +1,324 @@
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #f8fafc;
+}
+
+/* FONDO ANIMADO */
+
+.admin-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(135deg, #172d70 0%, #10235b 45%, #3d167d 100%);
+    overflow: hidden;
+}
+
+.admin-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+    animation: adminFloat 12s ease-in-out infinite;
+}
+
+.blob-1 {
+    width: 420px;
+    height: 420px;
+    top: -120px;
+    left: -100px;
+    background: #5420a8;
+}
+
+.blob-2 {
+    width: 380px;
+    height: 380px;
+    bottom: -140px;
+    right: -80px;
+    background: #198754;
+    animation-delay: 2.5s;
+    animation-duration: 15s;
+}
+
+.blob-3 {
+    width: 260px;
+    height: 260px;
+    top: 40%;
+    right: 15%;
+    background: #6b35c5;
+    animation-delay: 5s;
+    animation-duration: 10s;
+}
+
+@keyframes adminFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(30px, -40px) scale(1.08); }
+}
+
+/* TARJETA DE LOGIN */
+
+.admin-login-wrap {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.admin-login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 44px 38px;
+    background: rgba(255, 255, 255, 0.97);
+    border-radius: 24px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    animation: adminCardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes adminCardIn {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.admin-login-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 22px;
+}
+
+.admin-login-logo img {
+    height: 52px;
+}
+
+.admin-login-heading {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.admin-login-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+    border-radius: 50px;
+    background: rgba(84, 32, 168, 0.08);
+    color: #5420a8;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.admin-login-heading h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: #172033;
+    margin-bottom: 6px;
+}
+
+.admin-login-heading p {
+    color: #64748b;
+    font-size: 0.88rem;
+}
+
+/* ALERTA DE ERROR */
+
+.admin-alert-error {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    color: #b91c1c;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* CAMPOS */
+
+.admin-field {
+    margin-bottom: 18px;
+}
+
+.admin-field label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+.admin-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.admin-input-wrap i:first-child {
+    position: absolute;
+    left: 15px;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.admin-input-wrap input {
+    width: 100%;
+    padding: 13px 15px 13px 42px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 11px;
+    font-size: 0.92rem;
+    font-family: inherit;
+    color: #172033;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.admin-input-wrap input:focus {
+    outline: none;
+    border-color: #5420a8;
+    box-shadow: 0 0 0 4px rgba(84, 32, 168, 0.1);
+}
+
+.admin-toggle-password {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 4px;
+}
+
+.admin-toggle-password:hover {
+    color: #5420a8;
+}
+
+/* FILA REMEMBER / FORGOT */
+
+.admin-field-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.admin-remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: #475569;
+    cursor: pointer;
+}
+
+.admin-forgot {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #5420a8;
+    text-decoration: none;
+}
+
+.admin-forgot:hover {
+    text-decoration: underline;
+}
+
+/* BOTÓN */
+
+.admin-submit-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #5420a8, #7137c9);
+    color: white;
+    font-size: 0.94rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 12px 25px rgba(84, 32, 168, 0.28);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.admin-submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px rgba(84, 32, 168, 0.35);
+}
+
+.admin-submit-btn:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+}
+
+/* VOLVER AL SITIO */
+
+.admin-back-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+    color: #64748b;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.admin-back-link:hover {
+    color: #5420a8;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 480px) {
+
+    .admin-login-card {
+        padding: 32px 24px;
+        border-radius: 18px;
+    }
+
+    .admin-login-heading h1 {
+        font-size: 1.3rem;
+    }
+
+    .admin-blob {
+        filter: blur(40px);
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .admin-blob {
+        animation: none;
+    }
+
+    .admin-login-card {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+}
