@@ -61,7 +61,7 @@ Route::get('/solicitar-apoyo', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Violentometro 
+| Violentometro
 |--------------------------------------------------------------------------
 */
 
@@ -75,7 +75,7 @@ Route::post('/violentometro/evaluar', [ViolentometroController::class, 'evaluar'
 
 /*
 |--------------------------------------------------------------------------
-| Bienestar emocional 
+| Bienestar emocional
 |--------------------------------------------------------------------------
 */
 
@@ -87,23 +87,25 @@ Route::post('/bienestar-emocional/evaluar', [BienestarEmocionalController::class
 
 /*
 |--------------------------------------------------------------------------
-| Carga académica 
+| Carga académica
 |--------------------------------------------------------------------------
 */
 
 Route::get('/carga-academica', [CargaAcademicaController::class, 'index'])
     ->name('carga-academica');
-    
+
 Route::post('/carga-academica/evaluar', [CargaAcademicaController::class, 'evaluar'])
     ->name('carga-academica.evaluar');
 
 /*
 |--------------------------------------------------------------------------
-| Login 
+| Login
 |--------------------------------------------------------------------------
 */
 
 Route::get('/login', [AccessController::class, 'show'])->name('login')->middleware('guest');
 Route::post('/login/estudiante', [AccessController::class, 'estudiante'])->name('login.estudiante');
 Route::post('/login/administrador', [AccessController::class, 'administrador'])->name('login.administrador');
-Route::post('/logout', [AccessController::class, 'logout'])->name('logout')->middleware('auth');
+Route::post('/logout', [AccessController::class, 'logout'])->name('logout');
+Route::get('/registro', [AccessController::class, 'mostrarRegistro'])->name('registro.estudiante');
+Route::post('/registro', [AccessController::class, 'registrar'])->name('registro.estudiante.guardar');
