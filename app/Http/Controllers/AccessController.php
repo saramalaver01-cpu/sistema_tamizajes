@@ -71,7 +71,7 @@ class AccessController extends Controller
                         'estudiante_inicial' => $inicial,
                     ]);
 
-                    return redirect(route('home').'#modulos');
+                    return redirect()->intended(route('home').'#modulos');
 
                 }
 
@@ -135,13 +135,6 @@ class AccessController extends Controller
 
         $esEstudiante = $data['rol_institucional'] === 'Estudiante';
 
-        // El programa debe pertenecer a la facultad elegida
-        if ($esEstudiante && ! in_array($data['programa_academico'], $cfg['facultades'][$data['facultad']] ?? [], true)) {
-            throw ValidationException::withMessages([
-                'programa_academico' => 'El programa no corresponde a la facultad seleccionada.',
-            ]);
-        }
-
         // Limpia lo que no aplica según el rol
         if (! $esEstudiante) {
             $data['facultad'] = null;
@@ -172,7 +165,7 @@ class AccessController extends Controller
         'estudiante_inicial' => $inicial,
         ]);
 
-                return redirect(route('home').'#modulos');
+                return redirect()->intended(route('home').'#modulos');
     }
 
     public function administrador(Request $request)
