@@ -17,7 +17,6 @@ class EstadisticasController extends Controller
     /*
      * Instrumentos, su color y sus niveles de clasificación (de menor a mayor gravedad).
      * Cada nivel se define como [etiqueta, color].
-     * Las claves deben coincidir con las que guardan los controladores de cada módulo.
      */
     private const MODULOS = [
         'violentometro' => [
@@ -52,28 +51,65 @@ class EstadisticasController extends Controller
         ],
     ];
 
+    // Campos sociodemográficos filtrables: clave del filtro => columna en 'participantes'
+    private const CAMPOS_PARTICIPANTE = [
+        'rol'                => 'rol_institucional',
+        'facultad'           => 'facultad',
+        'programa'           => 'programa_academico',
+        'semestre'           => 'semestre',
+        'jornada'            => 'jornada',
+        'sexo'               => 'sexo',
+        'identidad_genero'   => 'identidad_genero',
+        'orientacion_sexual' => 'orientacion_sexual',
+        'estado_civil'       => 'estado_civil',
+        'nivel_educativo'    => 'nivel_educativo',
+        'estrato'            => 'estrato',
+        'municipio'          => 'municipio_residencia',
+    ];
+
     private const DIAS_TENDENCIA_POR_DEFECTO = 30;
     private const MAX_DIAS_TENDENCIA = 90;
 
     public function index(Request $request)
     {
+        $cfg = config('tamizaje.sociodemografico');
+
         /*
          * =====================================================
-         * 1. FILTROS (instrumento y rango de fechas)
+         * 1. VALIDACIÓN DE FILTROS
          * =====================================================
          * Si algún filtro no es válido no se aplica ninguno y se
          * muestra el motivo, en lugar de mostrar cifras engañosas.
          */
 
+        $programasValidos = $request->query('facultad') && isset($cfg['facultades'][$request->query('facultad')])
+            ? $cfg['facultades'][$request->query('facultad')]
+            : collect($cfg['facultades'])->flatten()->all();
+
         $validator = Validator::make($request->query(), [
             'modulo' => ['nullable', Rule::in(array_keys(self::MODULOS))],
             'desde'  => ['nullable', 'date_format:Y-m-d'],
             'hasta'  => ['nullable', 'date_format:Y-m-d', 'after_or_equal:desde'],
+
+            'rol'      => ['nullable', Rule::in($cfg['roles'])],
+            'facultad' => ['nullable', Rule::in(array_keys($cfg['facultades']))],
+            'programa' => ['nullable', Rule::in($programasValidos)],
+            'semestre' => ['nullable', 'integer', 'between:1,12'],
+            'jornada'  => ['nullable', Rule::in($cfg['jornadas'])],
+
+            'sexo'               => ['nullable', Rule::in($cfg['sexo'])],
+            'identidad_genero'   => ['nullable', Rule::in($cfg['identidad_genero'])],
+            'orientacion_sexual' => ['nullable', Rule::in($cfg['orientacion_sexual'])],
+            'estado_civil'       => ['nullable', Rule::in($cfg['estado_civil'])],
+            'nivel_educativo'    => ['nullable', Rule::in($cfg['nivel_educativo'])],
+            'estrato'            => ['nullable', 'integer', 'between:1,6'],
+            'municipio'          => ['nullable', 'string', 'max:100'],
+            'edad_desde'         => ['nullable', 'integer', 'between:15,100'],
+            'edad_hasta'         => ['nullable', 'integer', 'between:15,100', 'gte:edad_desde'],
         ], [
-            'modulo.in'            => 'Selecciona un instrumento válido.',
-            'desde.date_format'    => 'La fecha «Desde» no es válida.',
-            'hasta.date_format'    => 'La fecha «Hasta» no es válida.',
             'hasta.after_or_equal' => 'La fecha «Hasta» no puede ser anterior a «Desde».',
+            'programa.in'          => 'El programa no corresponde a la facultad seleccionada.',
+            'edad_hasta.gte'       => 'La edad «Hasta» no puede ser menor que «Desde».',
         ]);
 
         $filtros = $validator->fails() ? [] : $validator->validated();
@@ -88,13 +124,52 @@ class EstadisticasController extends Controller
             ? Carbon::createFromFormat('Y-m-d', $filtros['hasta'])->endOfDay()
             : null;
 
-        // Aplica los filtros activos a cualquier consulta de resultados
-        $filtrar = function ($consulta) use ($modulo, $desde, $hasta) {
+        // Filtros que aplican sobre la tabla 'participantes'
+        $filtrosParticipante = collect(self::CAMPOS_PARTICIPANTE)
+            ->keys()
+            ->mapWithKeys(fn ($clave) => [$clave => $filtros[$clave] ?? null])
+            ->filter()
+            ->all();
+
+        if (! empty($filtros['edad_desde'])) {
+            $filtrosParticipante['edad_desde'] = $filtros['edad_desde'];
+        }
+        if (! empty($filtros['edad_hasta'])) {
+            $filtrosParticipante['edad_hasta'] = $filtros['edad_hasta'];
+        }
+
+        $hayFiltroParticipante = count($filtrosParticipante) > 0;
+
+        $aplicarFiltroParticipante = function ($query) use ($filtrosParticipante) {
+            foreach ($filtrosParticipante as $clave => $valor) {
+                if ($clave === 'edad_desde') {
+                    $query->where('edad', '>=', $valor);
+                } elseif ($clave === 'edad_hasta') {
+                    $query->where('edad', '<=', $valor);
+                } else {
+                    $query->where(EstadisticasController::CAMPOS_PARTICIPANTE[$clave], $valor);
+                }
+            }
+        };
+
+        // Filtra cualquier consulta de resultados con todos los criterios activos
+        $filtrar = function ($consulta) use ($modulo, $desde, $hasta, $hayFiltroParticipante, $aplicarFiltroParticipante) {
             return $consulta
                 ->when($modulo, fn ($q) => $q->where('modulo', $modulo))
                 ->when($desde, fn ($q) => $q->where('creado_en', '>=', $desde))
-                ->when($hasta, fn ($q) => $q->where('creado_en', '<=', $hasta));
+                ->when($hasta, fn ($q) => $q->where('creado_en', '<=', $hasta))
+                ->when($hayFiltroParticipante, fn ($q) => $q->whereHas('participante', $aplicarFiltroParticipante));
         };
+
+        // Resumen legible de los filtros activos, para mostrarlo arriba de los resultados
+        $etiquetasParticipante = [
+            'rol' => 'Rol', 'facultad' => 'Facultad', 'programa' => 'Programa',
+            'semestre' => 'Semestre', 'jornada' => 'Jornada', 'sexo' => 'Sexo',
+            'identidad_genero' => 'Identidad de género', 'orientacion_sexual' => 'Orientación sexual',
+            'estado_civil' => 'Estado civil', 'nivel_educativo' => 'Nivel educativo',
+            'estrato' => 'Estrato', 'municipio' => 'Municipio',
+            'edad_desde' => 'Edad desde', 'edad_hasta' => 'Edad hasta',
+        ];
 
         $partesResumen = [];
         if ($modulo) {
@@ -106,12 +181,14 @@ class EstadisticasController extends Controller
         if ($hasta) {
             $partesResumen[] = 'hasta '.$hasta->format('d/m/Y');
         }
+        foreach ($filtrosParticipante as $clave => $valor) {
+            $partesResumen[] = strtolower($etiquetasParticipante[$clave]).': '.$valor;
+        }
         $resumenFiltros = $partesResumen ? implode(', ', $partesResumen) : null;
 
         /*
          * =====================================================
-         * 2. INDICADORES (todo sale de agrupaciones en la BD;
-         *    un tamizaje = una fila, sin joins que la dupliquen)
+         * 2. INDICADORES
          * =====================================================
          */
 
@@ -129,7 +206,6 @@ class EstadisticasController extends Controller
             ->get()
             ->groupBy('modulo');
 
-        // Gráfico de barras: siempre los tres instrumentos (los que no aplican salen en cero)
         $modulos = collect(self::MODULOS)->map(fn ($info, $clave) => [
             'clave'  => $clave,
             'nombre' => $info['nombre'],
@@ -137,7 +213,6 @@ class EstadisticasController extends Controller
             'total'  => (int) ($conteoPorModulo[$clave] ?? 0),
         ])->values()->all();
 
-        // Distribución por nivel: todos los niveles de cada instrumento, incluso los que están en cero
         $distribucion = collect(self::MODULOS)
             ->filter(fn ($info, $clave) => ! $modulo || $modulo === $clave)
             ->map(function ($info, $clave) use ($conteoNiveles, $conteoPorModulo) {
@@ -158,11 +233,7 @@ class EstadisticasController extends Controller
 
                 })->values()->all();
 
-                return [
-                    'nombre'  => $info['nombre'],
-                    'total'   => $totalModulo,
-                    'niveles' => $niveles,
-                ];
+                return ['nombre' => $info['nombre'], 'total' => $totalModulo, 'niveles' => $niveles];
 
             })->values()->all();
 
@@ -170,8 +241,6 @@ class EstadisticasController extends Controller
          * =====================================================
          * 3. TENDENCIA (un punto por día, incluidos los días en cero)
          * =====================================================
-         * Sin filtro de fechas: últimos 30 días.
-         * Con filtro: el rango elegido (máximo 90 días).
          */
 
         $hoy = now()->startOfDay();
@@ -196,6 +265,7 @@ class EstadisticasController extends Controller
 
         $conteoDias = ResultadoTamizaje::query()
             ->when($modulo, fn ($q) => $q->where('modulo', $modulo))
+            ->when($hayFiltroParticipante, fn ($q) => $q->whereHas('participante', $aplicarFiltroParticipante))
             ->whereBetween('creado_en', [$inicioSerie, $finSerie->copy()->endOfDay()])
             ->select(DB::raw('DATE(creado_en) as fecha'), DB::raw('count(*) as total'))
             ->groupBy('fecha')
@@ -210,7 +280,8 @@ class EstadisticasController extends Controller
 
         /*
          * =====================================================
-         * 4. ACCESOS (estudiantes distintos, no inicios de sesión)
+         * 4. ACCESOS (no se filtran por sociodemográficos: esa
+         *    tabla no guarda datos del participante, solo el hash)
          * =====================================================
          */
 
@@ -221,25 +292,29 @@ class EstadisticasController extends Controller
             ->count('email_hash');
 
         return view('admin.estadisticas', [
-            'estudiantesTotal'     => $estudiantesTotal,
-            'estudiantesActivos30' => $estudiantesActivos30,
-            'totalTamizajes'       => $totalTamizajes,
-            'modulos'              => $modulos,
-            'distribucion'         => $distribucion,
-            'tendencia'            => $tendencia,
-            'serie'                => [
+            'estudiantesTotal'      => $estudiantesTotal,
+            'estudiantesActivos30'  => $estudiantesActivos30,
+            'totalTamizajes'        => $totalTamizajes,
+            'modulos'               => $modulos,
+            'distribucion'          => $distribucion,
+            'tendencia'             => $tendencia,
+            'serie'                 => [
                 'inicio'    => $inicioSerie->format('d/m/Y'),
                 'fin'       => $finSerie->format('d/m/Y'),
                 'recortada' => $serieRecortada,
             ],
-            'opcionesModulo'       => collect(self::MODULOS)->map(fn ($m) => $m['nombre'])->all(),
-            'valores'              => [
-                'modulo' => $request->query('modulo'),
-                'desde'  => $request->query('desde'),
-                'hasta'  => $request->query('hasta'),
-            ],
-            'resumenFiltros'       => $resumenFiltros,
-            'erroresFiltro'        => $validator->errors()->all(),
+            'opcionesModulo'        => collect(self::MODULOS)->map(fn ($m) => $m['nombre'])->all(),
+            'opcionesSocio'         => $cfg,
+            'valores'               => array_merge([
+                'modulo' => null, 'desde' => null, 'hasta' => null,
+                'rol' => null, 'facultad' => null, 'programa' => null, 'semestre' => null, 'jornada' => null,
+                'sexo' => null, 'identidad_genero' => null, 'orientacion_sexual' => null,
+                'estado_civil' => null, 'nivel_educativo' => null, 'estrato' => null, 'municipio' => null,
+                'edad_desde' => null, 'edad_hasta' => null,
+            ], $request->query()),
+            'resumenFiltros'        => $resumenFiltros,
+            'hayFiltroParticipante' => $hayFiltroParticipante,
+            'erroresFiltro'         => $validator->errors()->all(),
         ]);
     }
 }
