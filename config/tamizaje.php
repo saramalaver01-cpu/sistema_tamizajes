@@ -29,6 +29,40 @@ return [
         'facultades' => [
             'Facultad de Ingeniería' => [
                 'Ingeniería de Sistemas',
+                'Ingeniería Biomédica',
+                'Ingeniería Agropecuaria',
+                'Ingeniería Electrónica',
+                'Ingeniería Ambiental',
+                'Ingeniería Industrial',
+                'Ingeniería en Energías',
+                'Tecnología en Obras Civiles',
+                'Tecnología en Abastecimiento y Logística',
+            ],
+
+            'Facultad de Ciencias Jurídicas y Humanísticas' => [
+                'Comunicación Transmedia',
+                'Derecho',
+                'Psicología',
+            ],
+
+            'Facultad de Ciencias Administrativas, Económicas y Contables' => [
+                'Administración de Empresas',
+                'Administración de Servicios de Salud',
+                'Contaduría Pública',
+                'Comercio Internacional',
+            ],
+
+            'Facultad de Ciencias de la Salud' => [
+                'Medicina',
+                'Enfermería',
+                'Tecnología en Regencia de Farmacia',
+            ],
+
+            'Facultad de Ciencias de la Educación' => [
+                'Licenciatura en Ciencias Sociales',
+                'Licenciatura en Educación Física, Recreación y Deporte',
+                'Licenciatura en Educación Infantil',
+                'Licenciatura en Lenguas Extranjeras con Énfasis en Inglés',
             ],
         ],
 
