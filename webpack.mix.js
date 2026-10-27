@@ -18,18 +18,21 @@ mix.js('resources/js/app.js', 'public/js')
 
 
 mix.js('resources/js/violentometro.js', 'public/js')
-   .css('resources/css/violentometro.css', 'public/css');
+    .css('resources/css/violentometro.css', 'public/css');
 
 
 mix.js('resources/js/Bienestar-emocional.js', 'public/js')
-   .css('resources/css/Bienestar-emocional.css', 'public/css');
+    .css('resources/css/Bienestar-emocional.css', 'public/css');
 
 
 mix.js('resources/js/carga-academica.js', 'public/js')
-   .css('resources/css/carga-academica.css', 'public/css');
+    .css('resources/css/carga-academica.css', 'public/css');
 
 mix.js('resources/js/login.js', 'public/js')
-   .css('resources/css/login.css', 'public/css');
+    .css('resources/css/login.css', 'public/css');
 
 mix.js('resources/js/admin.js', 'public/js')
-   .css('resources/css/admin.css', 'public/css');
+    .css('resources/css/admin.css', 'public/css');
+
+mix.js('resources/js/tamizaje.js', 'public/js')
+    .css('resources/css/tamizaje.css', 'public/css');

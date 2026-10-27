@@ -1,7 +1,7 @@
 @extends('admin.app')
 
 @section('title', 'Dashboard | Panel Administrativo')
-@section('page-title', 'Dashboard general')
+@section('page-title', 'Panel Administrativo')
 
 @section('content')
 
@@ -121,8 +121,8 @@
 @push('scripts')
 <script>
 
-    const datosModulos = @json($modulos);
-    const datosTendencia = @json($tendencia);
+    const datosModulos = @js($modulos);
+    const datosTendencia = @js($tendencia);
 
     document.addEventListener('DOMContentLoaded', () => {
 
