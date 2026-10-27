@@ -30,7 +30,14 @@ Route::get('/', function () {
 
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/estadisticas', [\App\Http\Controllers\Admin\EstadisticasController::class, 'index'])->name('estadisticas');
+    Route::get('/administradores', [\App\Http\Controllers\Admin\AdministradoresController::class, 'index'])
+        ->name('administradores.index');
+
+    Route::post('/administradores', [\App\Http\Controllers\Admin\AdministradoresController::class, 'store'])
+        ->name('administradores.store');
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -58,52 +65,37 @@ Route::get('/solicitar-apoyo', function () {
 })->name('solicitar-apoyo');
 
 
+Route::middleware('estudiante')->group(function () {
+
+    Route::get('/violentometro', [ViolentometroController::class, 'index'])
+        ->name('violentometro');
+
+    Route::post('/violentometro/evaluar', [ViolentometroController::class, 'evaluar'])
+        ->name('violentometro.evaluar');
+
+    Route::get('/bienestar-emocional', [BienestarEmocionalController::class, 'index'])
+        ->name('bienestar.emocional');
+
+    Route::post('/bienestar-emocional/evaluar', [BienestarEmocionalController::class, 'evaluar'])
+        ->name('bienestar.emocional.evaluar');
+
+    Route::get('/carga-academica', [CargaAcademicaController::class, 'index'])
+        ->name('carga-academica');
+
+    Route::post('/carga-academica/evaluar', [CargaAcademicaController::class, 'evaluar'])
+        ->name('carga-academica.evaluar');
+
+});
 
 /*
 |--------------------------------------------------------------------------
-| Violentometro 
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/violentometro', [ViolentometroController::class, 'index'])
-    ->name('violentometro');
-
-Route::post('/violentometro/evaluar', [ViolentometroController::class, 'evaluar'])
-    ->name('violentometro.evaluar');
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Bienestar emocional 
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/bienestar-emocional', [BienestarEmocionalController::class, 'index'])
-    ->name('bienestar.emocional');
-
-Route::post('/bienestar-emocional/evaluar', [BienestarEmocionalController::class, 'evaluar'])
-    ->name('bienestar.emocional.evaluar');
-
-/*
-|--------------------------------------------------------------------------
-| Carga académica 
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/carga-academica', [CargaAcademicaController::class, 'index'])
-    ->name('carga-academica');
-    
-Route::post('/carga-academica/evaluar', [CargaAcademicaController::class, 'evaluar'])
-    ->name('carga-academica.evaluar');
-
-/*
-|--------------------------------------------------------------------------
-| Login 
+| Login
 |--------------------------------------------------------------------------
 */
 
 Route::get('/login', [AccessController::class, 'show'])->name('login')->middleware('guest');
 Route::post('/login/estudiante', [AccessController::class, 'estudiante'])->name('login.estudiante');
 Route::post('/login/administrador', [AccessController::class, 'administrador'])->name('login.administrador');
-Route::post('/logout', [AccessController::class, 'logout'])->name('logout')->middleware('auth');
+Route::post('/logout', [AccessController::class, 'logout'])->name('logout');
+Route::get('/registro', [AccessController::class, 'mostrarRegistro'])->name('registro.estudiante');
+Route::post('/registro', [AccessController::class, 'registrar'])->name('registro.estudiante.guardar');

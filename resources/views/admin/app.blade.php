@@ -46,16 +46,20 @@
                     <span class="admin-nav-soon">Próx.</span>
                 </a>
 
-                <a href="#" class="admin-nav-link disabled">
+                <a href="{{ route('admin.estadisticas') }}" class="admin-nav-link {{ request()->routeIs('admin.estadisticas') ? 'active' : '' }}">
                     <i class="fa-solid fa-chart-column"></i>
                     Estadísticas
-                    <span class="admin-nav-soon">Próx.</span>
                 </a>
 
                 <a href="#" class="admin-nav-link disabled">
                     <i class="fa-solid fa-qrcode"></i>
                     Campañas
                     <span class="admin-nav-soon">Próx.</span>
+                </a>
+
+                <a href="{{ route('admin.administradores.index') }}" class="admin-nav-link {{ request()->routeIs('admin.administradores.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-user-shield"></i>
+                    Administradores
                 </a>
 
                 <a href="#" class="admin-nav-link disabled">

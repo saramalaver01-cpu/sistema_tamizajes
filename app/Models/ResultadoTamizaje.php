@@ -11,9 +11,15 @@ class ResultadoTamizaje extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'participante_id',
         'modulo',
         'nivel',
         'puntaje',
         'creado_en',
     ];
+
+    public function participante()
+    {
+        return $this->belongsTo(Participante::class);
+    }
 }
