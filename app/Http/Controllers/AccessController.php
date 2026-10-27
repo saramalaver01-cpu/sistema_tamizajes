@@ -38,13 +38,7 @@ class AccessController extends Controller
             'accedido_en' => now(),
             ]);
 
-        /*
-         * Según el documento del proyecto, el acceso de estudiantes
-         * es únicamente una validación institucional: no se usa
-         * contraseña ni se identifica a la persona directamente.
-         * Guardamos el correo solo en sesión, para personalizar la
-         * visita, no para autenticación real.
-         */
+
 
         $request->session()->put('estudiante_email', $email);
 
