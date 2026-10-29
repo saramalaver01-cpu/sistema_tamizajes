@@ -491,7 +491,7 @@
 
 .violent-thermo-marks {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     justify-content: space-between;
     height: 300px;
     padding-bottom: 34px;
