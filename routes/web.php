@@ -10,8 +10,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ModuloController;
 use App\Http\Controllers\Admin\PreguntaController;
 use App\Http\Controllers\Admin\NivelResultadoController;
+use App\Http\Controllers\Admin\EstadisticasController;
+use App\Http\Controllers\Admin\AdministradoresController;
 use App\Models\Modulo;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -30,41 +31,90 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard
+| Panel de administración
 |--------------------------------------------------------------------------
 */
 
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware('admin')
+    ->group(function () {
 
-Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
+        // Dashboard
+        Route::get('/dashboard', [
+            DashboardController::class, 'index'
+        ])->name('dashboard');
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        // CRUD de módulos
+        Route::resource('modulos', ModuloController::class)
+            ->except(['show']);
 
-    // CRUD de módulos
-    Route::resource('modulos', ModuloController::class)->except(['show']);
-    Route::patch('modulos/{modulo}/toggle', [ModuloController::class, 'toggle'])->name('modulos.toggle');
+        Route::patch('modulos/{modulo}/toggle', [
+            ModuloController::class, 'toggle'
+        ])->name('modulos.toggle');
 
-    // CRUD de preguntas (dimensiones + preguntas de cada módulo)
-    Route::get('modulos/{modulo}/preguntas', [PreguntaController::class, 'index'])->name('modulos.preguntas.index');
-    Route::post('modulos/{modulo}/dimensiones', [PreguntaController::class, 'storeDimension'])->name('dimensiones.store');
-    Route::put('dimensiones/{dimension}', [PreguntaController::class, 'updateDimension'])->name('dimensiones.update');
-    Route::delete('dimensiones/{dimension}', [PreguntaController::class, 'destroyDimension'])->name('dimensiones.destroy');
-    Route::post('dimensiones/{dimension}/preguntas', [PreguntaController::class, 'storePregunta'])->name('preguntas.store');
-    Route::put('preguntas/{pregunta}', [PreguntaController::class, 'updatePregunta'])->name('preguntas.update');
-    Route::delete('preguntas/{pregunta}', [PreguntaController::class, 'destroyPregunta'])->name('preguntas.destroy');
+        // Gestión de dimensiones y preguntas
+        Route::get('modulos/{modulo}/preguntas', [
+            PreguntaController::class, 'index'
+        ])->name('modulos.preguntas.index');
 
-    // Niveles de resultado (motor genérico)
-    Route::get('modulos/{modulo}/niveles', [NivelResultadoController::class, 'index'])->name('modulos.niveles.index');
-    Route::post('modulos/{modulo}/niveles', [NivelResultadoController::class, 'store'])->name('niveles.store');
-    Route::put('niveles/{nivel}', [NivelResultadoController::class, 'update'])->name('niveles.update');
-    Route::delete('niveles/{nivel}', [NivelResultadoController::class, 'destroy'])->name('niveles.destroy');
+        Route::post('modulos/{modulo}/dimensiones', [
+            PreguntaController::class, 'storeDimension'
+        ])->name('dimensiones.store');
 
-    Route::get('/estadisticas', [\App\Http\Controllers\Admin\EstadisticasController::class, 'index'])->name('estadisticas');
-    Route::get('/administradores', [\App\Http\Controllers\Admin\AdministradoresController::class, 'index'])
-        ->name('administradores.index');
+        Route::put('dimensiones/{dimension}', [
+            PreguntaController::class, 'updateDimension'
+        ])->name('dimensiones.update');
 
-    Route::post('/administradores', [\App\Http\Controllers\Admin\AdministradoresController::class, 'store'])
-        ->name('administradores.store');
-});
+        Route::delete('dimensiones/{dimension}', [
+            PreguntaController::class, 'destroyDimension'
+        ])->name('dimensiones.destroy');
+
+        Route::post('dimensiones/{dimension}/preguntas', [
+            PreguntaController::class, 'storePregunta'
+        ])->name('preguntas.store');
+
+        Route::put('preguntas/{pregunta}', [
+            PreguntaController::class, 'updatePregunta'
+        ])->name('preguntas.update');
+
+        Route::delete('preguntas/{pregunta}', [
+            PreguntaController::class, 'destroyPregunta'
+        ])->name('preguntas.destroy');
+
+        // Niveles de resultado
+        Route::get('modulos/{modulo}/niveles', [
+            NivelResultadoController::class, 'index'
+        ])->name('modulos.niveles.index');
+
+        Route::post('modulos/{modulo}/niveles', [
+            NivelResultadoController::class, 'store'
+        ])->name('niveles.store');
+
+        Route::put('niveles/{nivel}', [
+            NivelResultadoController::class, 'update'
+        ])->name('niveles.update');
+
+        Route::delete('niveles/{nivel}', [
+            NivelResultadoController::class, 'destroy'
+        ])->name('niveles.destroy');
+
+        // Estadísticas
+        Route::get('/estadisticas', [
+            EstadisticasController::class, 'index'
+        ])->name('estadisticas');
+
+        // Administración de usuarios administradores
+        Route::get('/administradores', [
+            AdministradoresController::class, 'index'
+        ])->name('administradores.index');
+
+        Route::post('/administradores', [
+            AdministradoresController::class, 'store'
+        ])->name('administradores.store');
+
+    });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -92,61 +142,110 @@ Route::get('/solicitar-apoyo', function () {
 })->name('solicitar-apoyo');
 
 
+/*
+|--------------------------------------------------------------------------
+| Rutas protegidas para estudiantes
+|--------------------------------------------------------------------------
+*/
+
 Route::middleware('estudiante')->group(function () {
 
+    /*
+    |--------------------------------------------------------------------------
+    | Violentómetro
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/violentometro', [
+        ViolentometroController::class, 'index'
+    ])->name('violentometro');
+
+    Route::post('/violentometro/evaluar', [
+        ViolentometroController::class, 'evaluar'
+    ])->name('violentometro.evaluar');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Bienestar emocional
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/bienestar-emocional', [
+        BienestarEmocionalController::class, 'index'
+    ])->name('bienestar.emocional');
+
+    Route::post('/bienestar-emocional/evaluar', [
+        BienestarEmocionalController::class, 'evaluar'
+    ])->name('bienestar.emocional.evaluar');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Carga académica
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/carga-academica', [
+        CargaAcademicaController::class, 'index'
+    ])->name('carga-academica');
+
+    Route::post('/carga-academica/evaluar', [
+        CargaAcademicaController::class, 'evaluar'
+    ])->name('carga-academica.evaluar');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Tamizaje genérico
+    |--------------------------------------------------------------------------
+    | Módulos creados desde el panel de administración
+    */
+
+    Route::get('/tamizaje/{clave}', [
+        TamizajeController::class, 'index'
+    ])->name('tamizaje.show');
+
+    Route::post('/tamizaje/{clave}/evaluar', [
+        TamizajeController::class, 'evaluar'
+    ])->name('tamizaje.evaluar');
+
+});
+
+
 /*
 |--------------------------------------------------------------------------
-| Violentometro
+| Autenticación y registro
 |--------------------------------------------------------------------------
 */
 
-    Route::get('/violentometro', [ViolentometroController::class, 'index'])
-        ->name('violentometro');
+// Formulario de inicio de sesión
+Route::get('/login', [
+    AccessController::class, 'show'
+])->name('login')->middleware('guest');
 
-    Route::post('/violentometro/evaluar', [ViolentometroController::class, 'evaluar'])
-        ->name('violentometro.evaluar');
+// Inicio de sesión de estudiantes
+Route::post('/login/estudiante', [
+    AccessController::class, 'estudiante'
+])->name('login.estudiante');
 
-    Route::get('/bienestar-emocional', [BienestarEmocionalController::class, 'index'])
-        ->name('bienestar.emocional');
+// Inicio de sesión de administradores
+Route::post('/login/administrador', [
+    AccessController::class, 'administrador'
+])->name('login.administrador');
 
-Route::post('/bienestar-emocional/evaluar', [BienestarEmocionalController::class, 'evaluar'])
-    ->name('bienestar.emocional.evaluar');
+// Formulario de registro de estudiantes
+Route::get('/registro', [
+    AccessController::class, 'mostrarRegistro'
+])->name('registro.estudiante');
 
-/*
-|--------------------------------------------------------------------------
-| Carga académica
-|--------------------------------------------------------------------------
-*/
+// Guardar registro de estudiantes
+Route::post('/registro', [
+    AccessController::class, 'registrar'
+])->name('registro.estudiante.guardar');
 
-Route::get('/carga-academica', [CargaAcademicaController::class, 'index'])
-    ->name('carga-academica');
+// Cerrar sesión
+Route::post('/logout', [
+    AccessController::class, 'logout'
+])->name('logout')->middleware('auth');
 
-Route::post('/carga-academica/evaluar', [CargaAcademicaController::class, 'evaluar'])
-    ->name('carga-academica.evaluar');
-
-/*
-|--------------------------------------------------------------------------
-| Tamizaje genérico (módulos nuevos creados desde el admin)
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/tamizaje/{clave}', [TamizajeController::class, 'index'])
-    ->name('tamizaje.show');
-
-Route::post('/tamizaje/{clave}/evaluar', [TamizajeController::class, 'evaluar'])
-    ->name('tamizaje.evaluar');
-
-/*
-|--------------------------------------------------------------------------
-| Login
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/login', [AccessController::class, 'show'])->name('login')->middleware('guest');
-Route::post('/login/estudiante', [AccessController::class, 'estudiante'])->name('login.estudiante');
-Route::post('/login/administrador', [AccessController::class, 'administrador'])->name('login.administrador');
-Route::post('/logout', [AccessController::class, 'logout'])->name('logout');
-Route::get('/registro', [AccessController::class, 'mostrarRegistro'])->name('registro.estudiante');
-Route::post('/registro', [AccessController::class, 'registrar'])->name('registro.estudiante.guardar');
-
-Route::post('/logout', [AccessController::class, 'logout'])->name('logout')->middleware('auth');
