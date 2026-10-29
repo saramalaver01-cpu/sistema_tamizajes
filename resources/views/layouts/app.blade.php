@@ -2,10 +2,9 @@
 
 <html lang="es">
 
+
 <head>
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <meta charset="UTF-8">
 
     <meta
@@ -27,10 +26,7 @@
          FUENTES
     ====================================================== -->
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link
         rel="preconnect"
@@ -54,512 +50,285 @@
     >
 
 
-    <!-- =====================================================
-         CSS DE LARAVEL MIX
-    ====================================================== -->
+ <!-- =====================================================
+     CSS DE LARAVEL MIX
+====================================================== -->
 
-    <link
-        rel="stylesheet"
-        href="{{ mix('css/app.css') }}"
-    >
+<link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-
-    @stack('styles')
-
+<script src="{{ mix('js/app.js') }}" defer></script>
+@stack('styles')
 </head>
-
-
+@stack('scripts')
 <body>
 
 
-<!-- =====================================================
-     NAVBAR
-====================================================== -->
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
 
-<header class="navbar">
+    <header class="navbar">
 
-    <div class="nav-container">
+        <div class="nav-container">
 
 
-        <!-- =================================================
-             LOGO
-        ================================================== -->
-
-        <a
-            href="{{ route('home') }}"
-            class="logo-container"
-        >
-
-            <img
-                src="{{ asset('images/logo-sibe.png') }}"
-                alt="Sistema de Bienestar Universitario"
-                class="logo"
-            >
-
-        </a>
-
-
-        <!-- =================================================
-             NAVEGACIÓN
-        ================================================== -->
-
-        <nav
-            class="nav-links"
-            id="navLinks"
-        >
-
-            <a href="{{ route('home') }}">
-                Inicio
-            </a>
-
-            <a href="{{ route('home') }}#servicios">
-                Servicios
-            </a>
-
-            <a href="{{ route('home') }}#modulos">
-                Herramientas
-            </a>
-
-            <a href="{{ route('home') }}#violentometro">
-                Violentómetro
-            </a>
-
-        </nav>
-
-
-        <!-- =================================================
-             ACCIONES
-        ================================================== -->
-
-        <div class="nav-actions">
-
-
-            {{-- =================================================
-            SESIÓN DE ESTUDIANTE
-            ================================================== --}}
-
-            @if (session('estudiante_email'))
-
-            <div
-                class="user-menu"
-                id="userMenu"
-            >
-
-                <button
-                    type="button"
-                    class="user-menu-trigger"
-                    id="userMenuTrigger"
-                >
-
-                            <span class="user-avatar">
-
-                                {{ strtoupper(
-                                    substr(
-                                        session('estudiante_email'),
-                                        0,
-                                        1
-                                    )
-                                ) }}
-
-                            </span>
-
-
-                    <span class="user-menu-label">
-
-                                {{ \Illuminate\Support\Str::limit(
-                                    session('estudiante_email'),
-                                    18
-                                ) }}
-
-                            </span>
-
-
-                    <i
-                        class="fa-solid fa-chevron-down user-menu-caret"
-                    ></i>
-
-                </button>
-
-
-                <div
-                    class="user-dropdown"
-                    id="userDropdown"
-                >
-
-                    <div class="user-dropdown-header">
-
-                                <span class="user-avatar large">
-
-                                    {{ strtoupper(
-                                        substr(
-                                            session('estudiante_email'),
-                                            0,
-                                            1
-                                        )
-                                    ) }}
-
-                                </span>
-
-
-                        <div>
-
-                            <strong>
-                                Sesión de estudiante
-                            </strong>
-
-                            <span>
-                                        {{ session('estudiante_email') }}
-                                    </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <a
-                        href="{{ route('home') }}#modulos"
-                        class="user-dropdown-item"
-                    >
-
-                        <i class="fa-solid fa-layer-group"></i>
-
-                        Ver módulos
-
-                    </a>
-
-
-                    <form
-                        method="POST"
-                        action="{{ route('logout') }}"
-                    >
-
-                        @csrf
-
-
-                        <button
-                            type="submit"
-                            class="user-dropdown-item danger"
-                        >
-
-                            <i
-                                class="fa-solid fa-arrow-right-from-bracket"
-                            ></i>
-
-                            Cerrar sesión
-
-                        </button>
-
-                    </form>
-
-                </div>
-
-            </div>
-
-
-            {{-- =================================================
-            SESIÓN DE ADMINISTRADOR
-            ================================================== --}}
-
-            @elseif (auth()->check() && auth()->user()->is_admin)
-
-            <div
-                class="user-menu"
-                id="userMenu"
-            >
-
-                <button
-                    type="button"
-                    class="user-menu-trigger"
-                    id="userMenuTrigger"
-                >
-
-                            <span class="user-avatar admin">
-
-                                {{ strtoupper(
-                                    substr(
-                                        auth()->user()->name,
-                                        0,
-                                        1
-                                    )
-                                ) }}
-
-                            </span>
-
-
-                    <span class="user-menu-label">
-
-                                {{ \Illuminate\Support\Str::limit(
-                                    auth()->user()->name,
-                                    18
-                                ) }}
-
-                            </span>
-
-
-                    <i
-                        class="fa-solid fa-chevron-down user-menu-caret"
-                    ></i>
-
-                </button>
-
-
-                <div
-                    class="user-dropdown"
-                    id="userDropdown"
-                >
-
-                    <div class="user-dropdown-header">
-
-                                <span class="user-avatar admin large">
-
-                                    {{ strtoupper(
-                                        substr(
-                                            auth()->user()->name,
-                                            0,
-                                            1
-                                        )
-                                    ) }}
-
-                                </span>
-
-
-                        <div>
-
-                            <strong>
-                                {{ auth()->user()->name }}
-                            </strong>
-
-                            <span>
-                                        Administrador
-                                    </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- =========================================
-                         PANEL ADMINISTRATIVO
-                    ========================================== -->
-
-                    <a
-                        href="{{ route('admin.dashboard') }}"
-                        class="user-dropdown-item"
-                    >
-
-                        <i class="fa-solid fa-gauge"></i>
-
-                        Panel administrativo
-
-                    </a>
-
-
-                    <!-- =========================================
-                         CERRAR SESIÓN
-                    ========================================== -->
-
-                    <form
-                        method="POST"
-                        action="{{ route('logout') }}"
-                    >
-
-                        @csrf
-
-
-                        <button
-                            type="submit"
-                            class="user-dropdown-item danger"
-                        >
-
-                            <i
-                                class="fa-solid fa-arrow-right-from-bracket"
-                            ></i>
-
-                            Cerrar sesión
-
-                        </button>
-
-                    </form>
-
-                </div>
-
-            </div>
-
-
-            {{-- =================================================
-            SIN SESIÓN
-            ================================================== --}}
-
-            @else
+            <!-- LOGO -->
 
             <a
-                href="{{ route('login') }}"
-                class="login-btn"
+                href="{{ route('home') }}"
+                class="logo-container"
             >
 
-                <i
-                    class="fa-solid fa-arrow-right-to-bracket"
-                ></i>
-
-                Iniciar sesión
+                <img
+                    src="{{ asset('images/logo-sibe.png') }}"
+                    alt="Sistema de Bienestar Universitario"
+                    class="logo"
+                >
 
             </a>
 
-            @endif
 
+            <!-- NAVEGACIÓN -->
 
-            <!-- =================================================
-                 MENÚ MÓVIL
-            ================================================== -->
-
-            <button
-                type="button"
-                class="menu-btn"
-                id="menuBtn"
-                aria-label="Abrir menú"
+            <nav
+                class="nav-links"
+                id="navLinks"
             >
-
-                <i class="fa-solid fa-bars"></i>
-
-            </button>
-
-        </div>
-
-    </div>
-
-</header>
-
-
-<!-- =====================================================
-     CONTENIDO PRINCIPAL
-====================================================== -->
-
-@yield('content')
-
-
-<!-- =====================================================
-     FOOTER
-====================================================== -->
-
-<footer>
-
-    <div class="footer-container">
-
-
-        <!-- =================================================
-             INFORMACIÓN
-        ================================================== -->
-
-        <div class="footer-brand">
-
-            <img
-                src="{{ asset('images/logo-sibe.png') }}"
-                alt="SBE"
-            >
-
-            <p>
-
-                Sistema de Bienestar Universitario.
-
-                Un espacio de acompañamiento para
-                nuestra comunidad universitaria.
-
-            </p>
-
-        </div>
-
-
-        <!-- =================================================
-             ENLACES
-        ================================================== -->
-
-        <div class="footer-links">
-
-
-            <div>
-
-                <h4>
-                    Plataforma
-                </h4>
-
 
                 <a href="{{ route('home') }}">
                     Inicio
                 </a>
 
-
-                <a href="{{ route('home') }}#servicios">
+                <a href="#servicios">
                     Servicios
                 </a>
 
-
-                <a href="{{ route('home') }}#modulos">
+                <a href="#modulos">
                     Herramientas
                 </a>
 
-            </div>
-
-
-            <div>
-
-                <h4>
-                    Bienestar
-                </h4>
-
-
-                <a href="{{ route('home') }}#violentometro">
+                <a href="#violentometro">
                     Violentómetro
                 </a>
 
+            </nav>
 
-                <a href="#">
-                    Contacto
+
+            <!-- ACCIONES -->
+
+            <div class="nav-actions">
+
+    @if (session('estudiante_email'))
+
+        <div class="user-menu" id="userMenu">
+
+            <button type="button" class="user-menu-trigger" id="userMenuTrigger">
+                <span class="user-avatar">
+                    {{ strtoupper(substr(session('estudiante_email'), 0, 1)) }}
+                </span>
+                <span class="user-menu-label">
+                    {{ Str::limit(session('estudiante_email'), 18) }}
+                </span>
+                <i class="fa-solid fa-chevron-down user-menu-caret"></i>
+            </button>
+
+            <div class="user-dropdown" id="userDropdown">
+
+                <div class="user-dropdown-header">
+                    <span class="user-avatar large">
+                        {{ strtoupper(substr(session('estudiante_email'), 0, 1)) }}
+                    </span>
+                    <div>
+                        <strong>Sesión de estudiante</strong>
+                        <span>{{ session('estudiante_email') }}</span>
+                    </div>
+                </div>
+
+                <a href="{{ route('home') }}#modulos" class="user-dropdown-item">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Ver módulos
                 </a>
 
-
-                <a href="#">
-                    Ayuda
-                </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="user-dropdown-item danger">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Cerrar sesión
+                    </button>
+                </form>
 
             </div>
 
         </div>
 
-    </div>
+    @elseif (auth()->check() && auth()->user()->is_admin)
+
+        <div class="user-menu" id="userMenu">
+
+            <button type="button" class="user-menu-trigger" id="userMenuTrigger">
+                <span class="user-avatar admin">
+                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                </span>
+                <span class="user-menu-label">
+                    {{ Str::limit(auth()->user()->name, 18) }}
+                </span>
+                <i class="fa-solid fa-chevron-down user-menu-caret"></i>
+            </button>
+
+            <div class="user-dropdown" id="userDropdown">
+
+                <div class="user-dropdown-header">
+                    <span class="user-avatar admin large">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    </span>
+                    <div>
+                        <strong>{{ auth()->user()->name }}</strong>
+                        <span>Administrador</span>
+                    </div>
+                </div>
+
+                <a href="{{ route('home') }}" class="user-dropdown-item">
+                    <i class="fa-solid fa-gauge"></i>
+                    Panel administrativo
+                </a>
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="user-dropdown-item danger">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Cerrar sesión
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+
+    @else
+
+        <a
+            href="{{ route('login') }}"
+            class="login-btn"
+        >
+
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+
+            Iniciar sesión
+
+        </a>
+
+    @endif
 
 
-    <!-- =================================================
-         FOOTER INFERIOR
-    ================================================== -->
+    <button
+        type="button"
+        class="menu-btn"
+        id="menuBtn"
+        aria-label="Abrir menú"
+    >
 
-    <div class="footer-bottom">
+        <i class="fa-solid fa-bars"></i>
 
-        <p>
+    </button>
 
-            © {{ date('Y') }}
+</div>
 
-            Sistema de Bienestar Universitario.
+        </div>
 
-            Todos los derechos reservados.
-
-        </p>
-
-    </div>
-
-</footer>
+    </header>
 
 
-<!-- =====================================================
-     JAVASCRIPT DE LARAVEL MIX
-====================================================== -->
+    <!-- =====================================================
+         CONTENIDO
+    ====================================================== -->
 
-<script
-    src="{{ mix('js/app.js') }}"
-    defer
-></script>
+    @yield('content')
 
 
-@stack('scripts')
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <div class="footer-container">
+
+
+            <div class="footer-brand">
+
+                <img
+                    src="{{ asset('images/logo-sibe.png') }}"
+                    alt="SBE"
+                >
+
+                <p>
+                    Sistema de Bienestar Universitario.
+                    Un espacio de acompañamiento para
+                    nuestra comunidad universitaria.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+
+                    <h4>
+                        Plataforma
+                    </h4>
+
+                    <a href="{{ route('home') }}">
+                        Inicio
+                    </a>
+
+                    <a href="#servicios">
+                        Servicios
+                    </a>
+
+                    <a href="#modulos">
+                        Herramientas
+                    </a>
+
+                </div>
+
+
+                <div>
+
+                    <h4>
+                        Bienestar
+                    </h4>
+
+                    <a href="#violentometro">
+                        Violentómetro
+                    </a>
+
+                    <a href="#">
+                        Contacto
+                    </a>
+
+                    <a href="#">
+                        Ayuda
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © {{ date('Y') }}
+                Sistema de Bienestar Universitario.
+                Todos los derechos reservados.
+            </p>
+
+        </div>
+
+    </footer>
 
 
 </body>

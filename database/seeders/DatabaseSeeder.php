@@ -2,23 +2,29 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
-
     {
-        $this->call(ModulosSeeder::class);
-        $this->call([ModulosSeeder::class, PreguntasViolentometroSeeder::class, ContextosViolentometroSeeder::class,]);
-        $this->call([ModulosSeeder::class, PreguntasViolentometroSeeder::class, PreguntasBienestarEmocionalSeeder::class,]);
-        $this->call([ModulosSeeder::class, PreguntasViolentometroSeeder::class, PreguntasBienestarEmocionalSeeder::class, PreguntasCargaAcademicaSeeder::class,]);
+        User::updateOrCreate(
+            ['email' => 'admin@uceva.edu.co'],
+            [
+                'name' => 'Administrador',
+                'password' => Hash::make('123456'),
+                'is_admin' => true,
+            ]
+        );
+
+        $this->call([
+            ModulosSeeder::class,
+            PreguntasViolentometroSeeder::class,
+            PreguntasBienestarEmocionalSeeder::class,
+            PreguntasCargaAcademicaSeeder::class,
+        ]);
     }
 
 }

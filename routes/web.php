@@ -58,6 +58,12 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::put('niveles/{nivel}', [NivelResultadoController::class, 'update'])->name('niveles.update');
     Route::delete('niveles/{nivel}', [NivelResultadoController::class, 'destroy'])->name('niveles.destroy');
 
+    Route::get('/estadisticas', [\App\Http\Controllers\Admin\EstadisticasController::class, 'index'])->name('estadisticas');
+    Route::get('/administradores', [\App\Http\Controllers\Admin\AdministradoresController::class, 'index'])
+        ->name('administradores.index');
+
+    Route::post('/administradores', [\App\Http\Controllers\Admin\AdministradoresController::class, 'store'])
+        ->name('administradores.store');
 });
 
 /*
@@ -86,6 +92,7 @@ Route::get('/solicitar-apoyo', function () {
 })->name('solicitar-apoyo');
 
 
+Route::middleware('estudiante')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
@@ -93,22 +100,14 @@ Route::get('/solicitar-apoyo', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/violentometro', [ViolentometroController::class, 'index'])
-    ->name('violentometro');
+    Route::get('/violentometro', [ViolentometroController::class, 'index'])
+        ->name('violentometro');
 
-Route::post('/violentometro/evaluar', [ViolentometroController::class, 'evaluar'])
-    ->name('violentometro.evaluar');
+    Route::post('/violentometro/evaluar', [ViolentometroController::class, 'evaluar'])
+        ->name('violentometro.evaluar');
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Bienestar emocional
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/bienestar-emocional', [BienestarEmocionalController::class, 'index'])
-    ->name('bienestar.emocional');
+    Route::get('/bienestar-emocional', [BienestarEmocionalController::class, 'index'])
+        ->name('bienestar.emocional');
 
 Route::post('/bienestar-emocional/evaluar', [BienestarEmocionalController::class, 'evaluar'])
     ->name('bienestar.emocional.evaluar');
@@ -146,4 +145,8 @@ Route::post('/tamizaje/{clave}/evaluar', [TamizajeController::class, 'evaluar'])
 Route::get('/login', [AccessController::class, 'show'])->name('login')->middleware('guest');
 Route::post('/login/estudiante', [AccessController::class, 'estudiante'])->name('login.estudiante');
 Route::post('/login/administrador', [AccessController::class, 'administrador'])->name('login.administrador');
+Route::post('/logout', [AccessController::class, 'logout'])->name('logout');
+Route::get('/registro', [AccessController::class, 'mostrarRegistro'])->name('registro.estudiante');
+Route::post('/registro', [AccessController::class, 'registrar'])->name('registro.estudiante.guardar');
+
 Route::post('/logout', [AccessController::class, 'logout'])->name('logout')->middleware('auth');

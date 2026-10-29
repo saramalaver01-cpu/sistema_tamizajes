@@ -125,7 +125,9 @@ class BienestarEmocionalController extends Controller
             ],
         ];
 
+        $participanteId = \App\Models\Participante::where('email_hash', session('estudiante_hash'))->value('id');
         ResultadoTamizaje::create([
+         'participante_id' => $participanteId,
          'modulo'    => 'bienestar_emocional',
          'nivel'     => $nivel,
          'puntaje'   => $puntaje,

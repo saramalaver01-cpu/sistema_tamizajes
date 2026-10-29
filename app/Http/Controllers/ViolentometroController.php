@@ -145,11 +145,12 @@ class ViolentometroController extends Controller
             ],
         ];
 
+        $participanteId = \App\Models\Participante::where('email_hash', session('estudiante_hash'))->value('id');
         ResultadoTamizaje::create([
-            'modulo'    => 'violentometro',
-            'nivel'     => $nivel,
-            'puntaje'   => $puntaje,
-            'creado_en' => now(),
+         'modulo'    => 'violentometro',
+        'nivel'     => $nivel,
+        'puntaje'   => $puntaje,
+        'creado_en' => now(),
         ]);
 
         return response()->json(array_merge([
