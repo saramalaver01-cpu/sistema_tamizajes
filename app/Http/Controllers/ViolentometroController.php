@@ -1,16 +1,49 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\ResultadoTamizaje;
 
+use App\Models\ResultadoTamizaje;
+use App\Models\Modulo;
 use Illuminate\Http\Request;
 
 class ViolentometroController extends Controller
 {
     public function index()
-{
-    return view('layouts.violentometro');
-}
+    {
+        $modulo = Modulo::with('dimensiones.preguntas')
+            ->where('clave', 'violentometro')
+            ->firstOrFail();
+
+        $violentometroData = [
+            'csrf' => csrf_token(),
+            'evaluarUrl' => route('violentometro.evaluar'),
+
+            'contextos' => [
+                ['valor' => 'pareja', 'etiqueta' => 'Relación de pareja', 'icono' => 'fa-heart'],
+                ['valor' => 'familia', 'etiqueta' => 'Relaciones familiares', 'icono' => 'fa-house'],
+                ['valor' => 'amistad', 'etiqueta' => 'Relaciones de amistad', 'icono' => 'fa-user-group'],
+                ['valor' => 'companeros', 'etiqueta' => 'Compañeros de estudio', 'icono' => 'fa-graduation-cap'],
+                ['valor' => 'laboral', 'etiqueta' => 'Entorno laboral', 'icono' => 'fa-briefcase'],
+            ],
+
+            'sujetos' => [
+                'pareja' => 'tu pareja',
+                'familia' => 'algún miembro de tu familia',
+                'amistad' => 'algún amigo o amiga',
+                'companeros' => 'algún compañero de estudio',
+                'laboral' => 'alguna persona de tu entorno laboral',
+            ],
+
+            'dimensiones' => $modulo->dimensiones->map(fn ($dim) => [
+                'titulo'    => $dim->titulo,
+                'preguntas' => $dim->preguntas->pluck('texto')->all(),
+            ])->values()->all(),
+
+            'opciones' => $modulo->opciones_escala,
+        ];
+
+        return view('layouts.violentometro', compact('violentometroData'));
+    }
 
     public function evaluar(Request $request)
     {
@@ -114,16 +147,15 @@ class ViolentometroController extends Controller
 
         $participanteId = \App\Models\Participante::where('email_hash', session('estudiante_hash'))->value('id');
         ResultadoTamizaje::create([
-        'participante_id' => $participanteId,
-        'modulo'    => 'violentometro',
+         'modulo'    => 'violentometro',
         'nivel'     => $nivel,
         'puntaje'   => $puntaje,
         'creado_en' => now(),
         ]);
 
         return response()->json(array_merge([
-    'nivel'   => $nivel,
-    'puntaje' => $puntaje,
-], $niveles[$nivel]));
+            'nivel'   => $nivel,
+            'puntaje' => $puntaje,
+        ], $niveles[$nivel]));
     }
 }

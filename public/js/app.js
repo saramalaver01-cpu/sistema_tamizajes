@@ -101,6 +101,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/tamizaje.css":
+/*!************************************!*\
+  !*** ./resources/css/tamizaje.css ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/app.css":
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
@@ -258,6 +271,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			"css/Bienestar-emocional": 0,
 /******/ 			"css/violentometro": 0,
 /******/ 			"css/app": 0,
+/******/ 			"css/tamizaje": 0,
 /******/ 			"css/admin": 0
 /******/ 		};
 /******/ 		
@@ -308,13 +322,14 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/admin"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/admin"], () => (__webpack_require__("./resources/css/app.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/admin"], () => (__webpack_require__("./resources/css/violentometro.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/admin"], () => (__webpack_require__("./resources/css/Bienestar-emocional.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/admin"], () => (__webpack_require__("./resources/css/carga-academica.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/admin"], () => (__webpack_require__("./resources/css/login.css")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/admin"], () => (__webpack_require__("./resources/css/admin.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/tamizaje","css/admin"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/tamizaje","css/admin"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/tamizaje","css/admin"], () => (__webpack_require__("./resources/css/violentometro.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/tamizaje","css/admin"], () => (__webpack_require__("./resources/css/Bienestar-emocional.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/tamizaje","css/admin"], () => (__webpack_require__("./resources/css/carga-academica.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/tamizaje","css/admin"], () => (__webpack_require__("./resources/css/login.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/tamizaje","css/admin"], () => (__webpack_require__("./resources/css/admin.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/login","css/carga-academica","css/Bienestar-emocional","css/violentometro","css/app","css/tamizaje","css/admin"], () => (__webpack_require__("./resources/css/tamizaje.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

@@ -349,7 +349,7 @@
 
 
 <!-- =====================================================
-     HERRAMIENTAS / TAMIZAJES
+     HERRAMIENTAS / TAMIZAJES (ahora dinámico desde la BD)
 ====================================================== -->
 
 <section
@@ -381,109 +381,51 @@
 
         <div class="modules-grid">
 
-    <!-- VIOLENTÓMETRO -->
+            @foreach($modulos as $modulo)
 
-    <article class="module-card green">
+            @php
+            // Cada módulo tiene su propia ruta pública ya existente.
+            // Si agregas un módulo nuevo con una ruta distinta, súmalo aquí.
+            $enlace = match($modulo->clave) {
+            'violentometro'       => route('violentometro'),
+            'bienestar_emocional' => route('bienestar.emocional'),
+            'carga_academica'     => route('carga-academica'),
+            default => route('tamizaje.show', $modulo->clave),
+            };
+            @endphp
 
-        <div class="module-bg-icon">
-            <i class="fa-solid fa-shield-heart"></i>
-        </div>
+            <article class="module-card {{ $modulo->color }}">
 
-        <div class="module-card-icon">
-            <i class="fa-solid fa-shield-heart"></i>
-        </div>
+                <div class="module-bg-icon">
+                    <i class="fa-solid {{ $modulo->icono }}"></i>
+                </div>
 
-        <h3>Violentómetro</h3>
+                <div class="module-card-icon">
+                    <i class="fa-solid {{ $modulo->icono }}"></i>
+                </div>
 
-        <p>
-            Identifica diferentes manifestaciones de violencia
-            y conoce cuándo buscar ayuda.
-        </p>
+                <h3>{{ $modulo->nombre }}</h3>
 
-        <div class="module-meta">
-            <span><i class="fa-solid fa-clock"></i> ~5 min</span>
-            <span><i class="fa-solid fa-list-check"></i> 21 preguntas</span>
-        </div>
+                <p>{{ $modulo->descripcion }}</p>
 
-        <a href="{{ route('violentometro') }}" class="module-link">
-            <span>Conocer el violentómetro</span>
-            <i class="fa-solid fa-arrow-right"></i>
-        </a>
+                <div class="module-meta">
+                    <span><i class="fa-solid fa-clock"></i> ~{{ $modulo->tiempo_estimado }} min</span>
+                    <span><i class="fa-solid fa-list-check"></i> {{ $modulo->total_preguntas }} preguntas</span>
+                </div>
 
-        <div class="module-decoration"></div>
-        <div class="module-decoration deco-2"></div>
-
-    </article>
-
-    <!-- BIENESTAR EMOCIONAL -->
-
-    <article class="module-card purple">
-
-        <div class="module-bg-icon">
-            <i class="fa-solid fa-face-smile"></i>
-        </div>
-
-        <div class="module-card-icon">
-            <i class="fa-solid fa-face-smile"></i>
-        </div>
-
-        <h3>Bienestar emocional</h3>
-
-        <p>
-            Responde el tamizaje para conocer aspectos
-            relacionados con tu bienestar emocional.
-        </p>
-
-        <div class="module-meta">
-            <span><i class="fa-solid fa-clock"></i> ~5 min</span>
-            <span><i class="fa-solid fa-list-check"></i> 21 preguntas</span>
-        </div>
-
-          <a href="{{ route('bienestar.emocional') }}" class="module-link">
-                    Conocer el bienestar emocional
+                <a href="{{ $enlace }}" class="module-link">
+                    <span>Conocer {{ mb_strtolower($modulo->nombre) }}</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
 
-        <div class="module-decoration"></div>
-        <div class="module-decoration deco-2"></div>
+                <div class="module-decoration"></div>
+                <div class="module-decoration deco-2"></div>
 
-    </article>
+            </article>
 
-    <!-- CARGA ACADÉMICA -->
+            @endforeach
 
-    <article class="module-card blue">
-
-        <div class="module-bg-icon">
-            <i class="fa-solid fa-book-open"></i>
         </div>
-
-        <div class="module-card-icon">
-            <i class="fa-solid fa-book-open"></i>
-        </div>
-
-        <h3>Carga académica</h3>
-
-        <p>
-            Identifica cómo la carga académica puede estar
-            influyendo en tu experiencia universitaria.
-        </p>
-
-        <div class="module-meta">
-            <span><i class="fa-solid fa-clock"></i> ~5 min</span>
-            <span><i class="fa-solid fa-list-check"></i> 18 preguntas</span>
-        </div>
-
-        <a href="{{ route('carga-academica') }}" class="module-link">
-            <span>Conocer la carga académica</span>
-            <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-        <div class="module-decoration"></div>
-        <div class="module-decoration deco-2"></div>
-
-    </article>
-
-</div>
 
     </div>
 
@@ -545,7 +487,7 @@
                 </div>
 
 
-                
+
 
             </div>
 

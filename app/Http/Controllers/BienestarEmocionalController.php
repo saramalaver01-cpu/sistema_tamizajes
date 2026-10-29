@@ -1,15 +1,35 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\ResultadoTamizaje;
+use App\Models\Modulo;
 use Illuminate\Http\Request;
 
 class BienestarEmocionalController extends Controller
 {
     public function index()
     {
-        return view('layouts.Bienestar-emocional');
+        $modulo = Modulo::with('dimensiones.preguntas')
+            ->where('clave', 'bienestar_emocional')
+            ->firstOrFail();
+
+        $bienestarData = [
+            'csrf' => csrf_token(),
+            'evaluarUrl' => route('bienestar.emocional.evaluar'),
+
+            'dimensiones' => $modulo->dimensiones->map(fn ($dim) => [
+                'titulo'      => $dim->titulo,
+                'descripcion' => $dim->descripcion,
+                'preguntas'   => $dim->preguntas->pluck('texto')->all(),
+            ])->values()->all(),
+
+            'opciones' => $modulo->opciones_escala,
+        ];
+
+        return view('layouts.Bienestar-emocional', compact('bienestarData'));
     }
+
 
     public function evaluar(Request $request)
     {

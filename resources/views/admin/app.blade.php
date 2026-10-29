@@ -40,10 +40,9 @@
                     Dashboard
                 </a>
 
-                <a href="#" class="admin-nav-link disabled">
+                <a href="{{ route('admin.modulos.index') }}" class="admin-nav-link {{ request()->routeIs('admin.modulos.*') ? 'active' : '' }}">
                     <i class="fa-solid fa-layer-group"></i>
                     Módulos
-                    <span class="admin-nav-soon">Próx.</span>
                 </a>
 
                 <a href="{{ route('admin.estadisticas') }}" class="admin-nav-link {{ request()->routeIs('admin.estadisticas') ? 'active' : '' }}">

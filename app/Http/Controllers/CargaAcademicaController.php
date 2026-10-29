@@ -1,15 +1,35 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\ResultadoTamizaje;
+use App\Models\Modulo;
 
 class CargaAcademicaController extends Controller
 {
     public function index()
     {
-        return view('layouts.carga-academica');
+        $modulo = Modulo::with('dimensiones.preguntas')
+            ->where('clave', 'carga_academica')
+            ->firstOrFail();
+
+        $cargaData = [
+            'csrf' => csrf_token(),
+            'evaluarUrl' => route('carga-academica.evaluar'),
+
+            'dimensiones' => $modulo->dimensiones->map(fn ($dim) => [
+                'titulo'      => $dim->titulo,
+                'descripcion' => $dim->descripcion,
+                'preguntas'   => $dim->preguntas->pluck('texto')->all(),
+            ])->values()->all(),
+
+            'opciones' => $modulo->opciones_escala,
+        ];
+
+        return view('layouts.carga-academica', compact('cargaData'));
     }
+
 
     public function evaluar(Request $request)
     {

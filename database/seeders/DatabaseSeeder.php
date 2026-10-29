@@ -19,6 +19,12 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Aquí irá el estudiante de prueba
+        $this->call([
+            ModulosSeeder::class,
+            PreguntasViolentometroSeeder::class,
+            PreguntasBienestarEmocionalSeeder::class,
+            PreguntasCargaAcademicaSeeder::class,
+        ]);
     }
+
 }
