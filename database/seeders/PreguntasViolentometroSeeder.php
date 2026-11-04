@@ -17,16 +17,10 @@ class PreguntasViolentometroSeeder extends Seeder
             return;
         }
 
-        // Escala y contextos (tal cual los tenías hardcodeados en la vista)
+
         $modulo->update([
             'opciones_escala' => ['Nunca', 'Casi nunca', 'Algunas veces', 'Frecuentemente', 'Siempre'],
-            'contextos' => [
-                ['valor' => 'pareja', 'etiqueta' => 'Relación de pareja', 'icono' => 'fa-heart', 'sujeto' => 'tu pareja'],
-                ['valor' => 'familia', 'etiqueta' => 'Relaciones familiares', 'icono' => 'fa-house', 'sujeto' => 'algún miembro de tu familia'],
-                ['valor' => 'amistad', 'etiqueta' => 'Relaciones de amistad', 'icono' => 'fa-user-group', 'sujeto' => 'algún amigo o amiga'],
-                ['valor' => 'companeros', 'etiqueta' => 'Compañeros de estudio', 'icono' => 'fa-graduation-cap', 'sujeto' => 'algún compañero de estudio'],
-                ['valor' => 'laboral', 'etiqueta' => 'Entorno laboral', 'icono' => 'fa-briefcase', 'sujeto' => 'alguna persona de tu entorno laboral'],
-            ],
+
         ]);
 
         $dimensiones = [
