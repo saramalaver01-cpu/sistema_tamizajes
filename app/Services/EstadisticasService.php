@@ -9,16 +9,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-/**
- * Lógica compartida entre la pantalla de Estadísticas y los reportes (Excel / PDF):
- * validación de filtros, consulta base y cálculo de indicadores.
- */
+
 class EstadisticasService
 {
-    /*
-     * Instrumentos, su color y sus niveles de clasificación (de menor a mayor gravedad).
-     * Cada nivel se define como [etiqueta, color].
-     */
+
     public const MODULOS = [
         'violentometro' => [
             'nombre'  => 'Violentómetro',
@@ -52,7 +46,7 @@ class EstadisticasService
         ],
     ];
 
-    // Campos sociodemográficos filtrables: clave del filtro => columna en 'participantes'
+
     public const CAMPOS_PARTICIPANTE = [
         'rol'                => 'rol_institucional',
         'facultad'           => 'facultad',
@@ -80,11 +74,7 @@ class EstadisticasService
     private const DIAS_TENDENCIA_POR_DEFECTO = 30;
     private const MAX_DIAS_TENDENCIA = 90;
 
-    /**
-     * Valida los filtros recibidos por query string y devuelve el "contexto" con todo
-     * lo necesario para consultar. Si algún filtro no es válido NO se aplica ninguno
-     * (y se devuelven los errores) para no mostrar cifras engañosas.
-     */
+
     public function contexto(array $query): array
     {
         $cfg = config('tamizaje.sociodemografico');
@@ -175,10 +165,7 @@ class EstadisticasService
         ];
     }
 
-    /**
-     * Consulta base de resultados con todos los filtros activos aplicados.
-     * Devuelve un constructor nuevo en cada llamada, listo para agregar agrupaciones.
-     */
+
     public function consulta(array $ctx)
     {
         $fp = $ctx['filtrosParticipante'];
@@ -200,9 +187,7 @@ class EstadisticasService
             }));
     }
 
-    /**
-     * Total de tamizajes, conteo por instrumento y distribución por nivel.
-     */
+
     public function indicadores(array $ctx): array
     {
         $modulo = $ctx['modulo'];
@@ -221,7 +206,7 @@ class EstadisticasService
             ->get()
             ->groupBy('modulo');
 
-        // Los tres instrumentos siempre aparecen (los que no aplican salen en cero)
+
         $modulos = collect(self::MODULOS)->map(fn ($info, $clave) => [
             'clave'  => $clave,
             'nombre' => $info['nombre'],
@@ -229,7 +214,7 @@ class EstadisticasService
             'total'  => (int) ($conteoPorModulo[$clave] ?? 0),
         ])->values()->all();
 
-        // Todos los niveles de cada instrumento, incluso los que están en cero
+
         $distribucion = collect(self::MODULOS)
             ->filter(fn ($info, $clave) => ! $modulo || $modulo === $clave)
             ->map(function ($info, $clave) use ($conteoNiveles, $conteoPorModulo) {
@@ -257,9 +242,7 @@ class EstadisticasService
         return compact('totalTamizajes', 'conteoPorModulo', 'modulos', 'distribucion');
     }
 
-    /**
-     * Serie diaria para el gráfico de tendencia (incluye los días en cero).
-     */
+
     public function tendencia(array $ctx): array
     {
         $desde = $ctx['desde'];
