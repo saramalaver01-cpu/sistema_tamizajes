@@ -10,7 +10,7 @@ return [
     | cambiar ni perder: los hashes dejarían de coincidir y los participantes
     | perderían el vínculo con su historial.
     */
-    'anon_hash_key' => env('ANON_HASH_KEY'),
+    'anon_hash_key' => env('ANON_HASH_KEY'), 'reporte_min_grupo' => env('REPORTE_MIN_GRUPO', 5),
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
 
         'roles' => ['Estudiante', 'Docente', 'Funcionario', 'Contratista', 'Otro'],
 
-        // Roles a los que se les pregunta la dependencia (en lugar de facultad/programa)
+
         'roles_con_dependencia' => ['Funcionario', 'Contratista', 'Otro'],
 
         // TODO: completar con las facultades y programas reales de la UCEVA
