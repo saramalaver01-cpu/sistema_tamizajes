@@ -544,6 +544,550 @@ body {
     background: #fee2e2;
 }
 
+/* =========================================
+   CAMPAÑAS
+   ========================================= */
+
+/* ---- Cómo funciona ---- */
+
+.camp-howto { margin-bottom: 26px; }
+
+.camp-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.camp-step {
+    background: #f8f7fc;
+    border: 1px solid #eee9fa;
+    border-radius: 14px;
+    padding: 16px;
+}
+
+.camp-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7c3aed, #5420a8);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.camp-step strong {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.92rem;
+    color: #172033;
+    margin-bottom: 4px;
+}
+
+.camp-step p {
+    font-size: 0.8rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+/* ---- Barra superior del listado ---- */
+
+.camp-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.camp-toolbar h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+    color: #172033;
+}
+
+.camp-toolbar p {
+    font-size: 0.82rem;
+    color: #64748b;
+}
+
+/* ---- Tarjetas de campaña ---- */
+
+.camp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 18px;
+}
+
+.camp-card {
+    --camp-color: #94a3b8;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-top: 5px solid var(--camp-color);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(20, 30, 60, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.camp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(20, 30, 60, 0.1);
+}
+
+.camp-en_curso   { --camp-color: #16a34a; }
+.camp-programada { --camp-color: #2563eb; }
+.camp-finalizada { --camp-color: #94a3b8; }
+.camp-pausada    { --camp-color: #f59e0b; }
+
+.camp-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.camp-card-head h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #172033;
+    line-height: 1.3;
+}
+
+.camp-badge {
+    flex-shrink: 0;
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.camp-badge-en_curso   { background: #dcfce7; color: #15803d; }
+.camp-badge-programada { background: #dbeafe; color: #1d4ed8; }
+.camp-badge-finalizada { background: #f1f5f9; color: #475569; }
+.camp-badge-pausada    { background: #fef3c7; color: #b45309; }
+
+.camp-desc {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.camp-dates {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+.camp-dates i { color: #94a3b8; font-size: 0.78rem; }
+.camp-dates-big { font-size: 0.92rem; margin: 12px 0; }
+
+.camp-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.camp-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--chip-from), var(--chip-to));
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.camp-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.camp-metrics > div {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 10px 14px;
+}
+
+.camp-metric-value {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #172033;
+}
+
+.camp-metric-label {
+    display: block;
+    font-size: 0.72rem;
+    color: #64748b;
+}
+
+/* ---- Enlace con botón copiar ---- */
+
+.camp-link-row {
+    display: flex;
+    gap: 8px;
+}
+
+.camp-link-row input {
+    flex: 1;
+    min-width: 0;
+    padding: 9px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #f8fafc;
+    font-size: 0.78rem;
+    color: #475569;
+    font-family: 'Inter', sans-serif;
+}
+
+.camp-link-row .admin-btn { white-space: nowrap; }
+
+.admin-btn.copied {
+    background: #dcfce7;
+    border-color: #bbf7d0;
+    color: #15803d;
+}
+
+.camp-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 4px;
+}
+
+.camp-actions form { margin: 0; }
+.camp-actions .admin-btn-primary { margin-right: auto; }
+.camp-actions .admin-icon-btn { margin-right: 0; }
+
+/* ---- Estado vacío ---- */
+
+.camp-empty {
+    text-align: center;
+    background: #fff;
+    border: 2px dashed #ddd6f3;
+    border-radius: 18px;
+    padding: 48px 20px;
+}
+
+.camp-empty i {
+    font-size: 2.4rem;
+    color: #7c3aed;
+    margin-bottom: 12px;
+}
+
+.camp-empty h4 {
+    font-family: 'Poppins', sans-serif;
+    color: #172033;
+    margin-bottom: 6px;
+}
+
+.camp-empty p {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 18px;
+}
+
+/* ---- Formulario ---- */
+
+.camp-form .admin-panel { margin-bottom: 18px; }
+.camp-wide { max-width: 640px; }
+
+.camp-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 260px));
+    gap: 18px;
+}
+
+.camp-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+/* Interruptor "Campaña activa" */
+
+.camp-switch {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    margin-top: 6px;
+}
+
+.camp-switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+.camp-switch-slider {
+    position: relative;
+    flex-shrink: 0;
+    width: 46px;
+    height: 26px;
+    border-radius: 999px;
+    background: #cbd5e1;
+    transition: background 0.2s ease;
+}
+
+.camp-switch-slider::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.camp-switch input:checked + .camp-switch-slider { background: #7c3aed; }
+.camp-switch input:checked + .camp-switch-slider::after { transform: translateX(20px); }
+
+.camp-switch-text strong {
+    display: block;
+    font-size: 0.88rem;
+    color: #172033;
+}
+
+.camp-switch-text small {
+    font-size: 0.78rem;
+    color: #64748b;
+}
+
+/* Selección de módulos como tarjetas */
+
+.camp-mod-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+}
+
+.camp-mod-option { position: relative; display: block; cursor: pointer; }
+
+.camp-mod-option input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+.camp-mod-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 14px;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.camp-mod-option:hover .camp-mod-card { border-color: #c4b5fd; }
+
+.camp-mod-option input:checked + .camp-mod-card {
+    border-color: #7c3aed;
+    background: #faf8ff;
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+}
+
+.camp-mod-icon {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--mod-from), var(--mod-to));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.camp-mod-info { flex: 1; min-width: 0; }
+
+.camp-mod-info strong {
+    display: block;
+    font-size: 0.88rem;
+    color: #172033;
+}
+
+.camp-mod-info small {
+    font-size: 0.74rem;
+    color: #64748b;
+}
+
+.camp-check {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #7c3aed;
+    color: #fff;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.6);
+    transition: all 0.2s ease;
+}
+
+.camp-mod-option input:checked + .camp-mod-card .camp-check {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ---- Detalle de campaña ---- */
+
+.camp-show-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.camp-show-grid {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 18px;
+    align-items: start;
+}
+
+.camp-qr-panel { text-align: center; }
+.camp-qr-panel .admin-panel-header { text-align: left; }
+
+.camp-qr-box {
+    display: inline-block;
+    padding: 18px;
+    margin-bottom: 18px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(84, 32, 168, 0.12);
+}
+
+#qrCode img, #qrCode canvas { display: block; margin: 0 auto; }
+
+.camp-qr-panel .camp-link-row { margin-bottom: 14px; }
+
+.camp-qr-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.camp-hint {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    text-align: left;
+    font-size: 0.76rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.camp-hint i { color: #7c3aed; margin-top: 2px; }
+
+.camp-info { display: flex; flex-direction: column; gap: 18px; }
+
+.camp-info-head h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.15rem;
+    color: #172033;
+    margin-bottom: 8px;
+}
+
+.camp-stat-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+/* Barras por módulo */
+
+.camp-bar-row { margin-bottom: 18px; }
+.camp-bar-row:last-child { margin-bottom: 0; }
+
+.camp-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #334155;
+    margin-bottom: 6px;
+}
+
+.camp-bar-track {
+    height: 10px;
+    background: #eef0f5;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.camp-bar-fill {
+    height: 100%;
+    min-width: 4px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--bar-from), var(--bar-to));
+    transition: width 0.8s cubic-bezier(.22, 1, .36, 1);
+}
+
+.camp-levels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.camp-level {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    color: #475569;
+}
+
+.camp-privacy {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: linear-gradient(135deg, rgba(84, 32, 168, 0.06), rgba(22, 163, 74, 0.06));
+    border: 1px solid #e5def7;
+    border-radius: 14px;
+    padding: 14px 16px;
+}
+
+.camp-privacy i { color: #5420a8; font-size: 1.2rem; margin-top: 2px; }
+.camp-privacy p { font-size: 0.8rem; color: #475569; line-height: 1.5; }
+
+/* ---- Responsive ---- */
+
+@media (max-width: 1100px) {
+    .camp-show-grid { grid-template-columns: 1fr; }
+    .camp-steps { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .camp-steps,
+    .camp-form-grid,
+    .camp-stat-pair { grid-template-columns: 1fr; }
+    .camp-grid { grid-template-columns: 1fr; }
+}
+
 /* FORMULARIOS */
 
 .admin-form-group {
@@ -653,5 +1197,7 @@ body {
     .modulos-preview-grid {
         grid-template-columns: 1fr;
     }
+
+
 
 }

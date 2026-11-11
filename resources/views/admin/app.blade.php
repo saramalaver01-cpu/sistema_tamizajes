@@ -50,10 +50,9 @@
                     Estadísticas
                 </a>
 
-                <a href="#" class="admin-nav-link disabled">
+                <a href="{{ route('admin.campanas.index') }}" class="admin-nav-link {{ request()->routeIs('admin.campanas.*') ? 'active' : '' }}">
                     <i class="fa-solid fa-qrcode"></i>
                     Campañas
-                    <span class="admin-nav-soon">Próx.</span>
                 </a>
 
                 <a href="{{ route('admin.administradores.index') }}" class="admin-nav-link {{ request()->routeIs('admin.administradores.*') ? 'active' : '' }}">

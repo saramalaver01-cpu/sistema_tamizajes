@@ -101,7 +101,12 @@
 
             </div>
 
-            <button type="submit" class="dash-btn">Crear administrador</button>
+
+            <button type="submit" class="admin-btn admin-btn-primary btn-crear-admin">
+                <i class="fa-solid fa-user-plus"></i>
+                Crear administrador
+            </button>
+
 
         </form>
 
