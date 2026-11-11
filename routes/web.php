@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\NivelResultadoController;
 use App\Http\Controllers\Admin\EstadisticasController;
 use App\Http\Controllers\Admin\AdministradoresController;
 use App\Models\Modulo;
+use App\Http\Controllers\Admin\CampanaController;
+use App\Http\Controllers\CampanaPublicaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +105,9 @@ Route::prefix('admin')
         Route::get('/estadisticas', [
             EstadisticasController::class, 'index'
         ])->name('estadisticas');
+
+        Route::resource('campanas', CampanaController::class);
+        Route::patch('campanas/{campana}/toggle', [CampanaController::class, 'toggle'])->name('campanas.toggle');
 
         Route::get('/reportes/excel', [\App\Http\Controllers\Admin\ReportesController::class, 'excel'])->name('reportes.excel');
         Route::get('/reportes/pdf', [\App\Http\Controllers\Admin\ReportesController::class, 'pdf'])->name('reportes.pdf');
@@ -252,3 +257,6 @@ Route::post('/logout', [
     AccessController::class, 'logout'
 ])->name('logout')->middleware('auth');
 
+Route::get('/campanas/{codigo}', [
+    CampanaPublicaController::class, 'entrar'
+])->name('campanas.entrada');

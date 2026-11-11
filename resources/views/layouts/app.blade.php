@@ -175,10 +175,12 @@
                     </div>
                 </div>
 
-                <a href="{{ route('home') }}" class="user-dropdown-item">
+
+                <a href="{{ route('admin.dashboard') }}" class="user-dropdown-item">
                     <i class="fa-solid fa-gauge"></i>
                     Panel administrativo
                 </a>
+
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
