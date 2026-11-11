@@ -109,6 +109,8 @@ Route::prefix('admin')
         Route::resource('campanas', CampanaController::class);
         Route::patch('campanas/{campana}/toggle', [CampanaController::class, 'toggle'])->name('campanas.toggle');
 
+        Route::get('/reportes/excel', [\App\Http\Controllers\Admin\ReportesController::class, 'excel'])->name('reportes.excel');
+        Route::get('/reportes/pdf', [\App\Http\Controllers\Admin\ReportesController::class, 'pdf'])->name('reportes.pdf');
 
         // Administración de usuarios administradores
         Route::get('/administradores', [

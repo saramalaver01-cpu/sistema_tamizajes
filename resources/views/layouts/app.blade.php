@@ -118,50 +118,38 @@
 
             <div class="nav-actions">
 
-    @if (session('estudiante_email'))
+        @if (session()->has('estudiante_hash') && ! auth()->check())
 
-        <div class="user-menu" id="userMenu">
+            <div class="user-menu" id="userMenu">
 
-            <button type="button" class="user-menu-trigger" id="userMenuTrigger">
-                <span class="user-avatar">
-                    {{ strtoupper(substr(session('estudiante_email'), 0, 1)) }}
-                </span>
-                <span class="user-menu-label">
-                    {{ Str::limit(session('estudiante_email'), 18) }}
-                </span>
-                <i class="fa-solid fa-chevron-down user-menu-caret"></i>
-            </button>
-
-            <div class="user-dropdown" id="userDropdown">
-
-                <div class="user-dropdown-header">
-                    <span class="user-avatar large">
-                        {{ strtoupper(substr(session('estudiante_email'), 0, 1)) }}
+                <button
+                    type="button"
+                    class="user-menu-trigger"
+                    id="userMenuTrigger"
+                    aria-label="Menú de usuario"
+                    aria-haspopup="true"
+                >
+                    <span class="user-avatar">
+                        {{ session('estudiante_inicial', '?') }}
                     </span>
-                    <div>
-                        <strong>Sesión de estudiante</strong>
-                        <span>{{ session('estudiante_email') }}</span>
-                    </div>
+                    <i class="fa-solid fa-chevron-down user-menu-caret"></i>
+                </button>
+
+                <div class="user-dropdown" id="userDropdown">
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="user-dropdown-item danger">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Cerrar sesión
+                        </button>
+                    </form>
+
                 </div>
-
-                <a href="{{ route('home') }}#modulos" class="user-dropdown-item">
-                    <i class="fa-solid fa-layer-group"></i>
-                    Ver módulos
-                </a>
-
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="user-dropdown-item danger">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                        Cerrar sesión
-                    </button>
-                </form>
 
             </div>
 
-        </div>
-
-    @elseif (auth()->check() && auth()->user()->is_admin)
+        @elseif (auth()->check() && auth()->user()->is_admin)
 
         <div class="user-menu" id="userMenu">
 

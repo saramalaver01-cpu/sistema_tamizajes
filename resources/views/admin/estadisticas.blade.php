@@ -5,6 +5,8 @@
 
 @push('styles')
 <style>
+    .dash-acciones { flex-wrap: wrap; }
+    .dash-btn-sec { background: #fff; color: #5420a8; border: 1px solid #5420a8; }
     .dash-filtros-grupo { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
     .dash-campo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
     .dash-campo label { font-size: .85rem; font-weight: 600; }
@@ -250,6 +252,13 @@
 
         <div class="dash-acciones">
             <button type="submit" class="dash-btn">Aplicar filtros</button>
+
+            <button type="submit" class="dash-btn dash-btn-sec" formaction="{{ route('admin.reportes.excel') }}">
+                <i class="fa-solid fa-file-excel"></i> Excel
+            </button>
+            <button type="submit" class="dash-btn dash-btn-sec" formaction="{{ route('admin.reportes.pdf') }}">
+                <i class="fa-solid fa-file-pdf"></i> PDF
+            </button>
 
             @if ($resumenFiltros || count($erroresFiltro))
                 <a href="{{ route('admin.estadisticas') }}" class="dash-btn-link">Limpiar filtros</a>
