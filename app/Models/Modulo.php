@@ -125,6 +125,22 @@ class Modulo extends Model
         }
     }
 
+    // Dirección pública de cada módulo (los 3 originales tienen su propia ruta)
+    public function getUrlPublicaAttribute(): string
+    {
+        return match ($this->clave) {
+            'violentometro'       => route('violentometro'),
+            'bienestar_emocional' => route('bienestar.emocional'),
+            'carga_academica'     => route('carga-academica'),
+            default               => route('tamizaje.show', $this->clave),
+        };
+    }
+
+    public function campanas()
+    {
+        return $this->belongsToMany(Campana::class, 'campana_modulo');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Actualizar total de preguntas
