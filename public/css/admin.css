@@ -1201,3 +1201,229 @@ body {
 
 
 }
+
+/* ==========================================
+   DASHBOARD - BIENVENIDA INSTITUCIONAL SBE
+========================================== */
+
+.sbe-welcome {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+    align-items: center;
+    gap: 40px;
+    min-height: 490px;
+    padding: 60px;
+    overflow: hidden;
+    border-radius: 26px;
+    background: linear-gradient(
+        120deg,
+        #142d69 0%,
+        #253981 52%,
+        #6030ac 100%
+    );
+    box-shadow: 0 18px 45px rgba(28, 47, 113, 0.17);
+    isolation: isolate;
+}
+
+/* Decoración de fondo */
+
+.sbe-welcome-decoration {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.sbe-circle-one {
+    width: 350px;
+    height: 350px;
+    top: -210px;
+    right: -90px;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.sbe-circle-two {
+    width: 250px;
+    height: 250px;
+    bottom: -170px;
+    left: 30%;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Contenido de bienvenida */
+
+.sbe-welcome-content {
+    position: relative;
+    z-index: 2;
+}
+
+.sbe-welcome-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 17px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 28px;
+}
+
+.sbe-welcome-badge i {
+    color: #c0f5d5;
+}
+
+.sbe-welcome-content h2 {
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(29px, 3vw, 42px);
+    font-weight: 800;
+    line-height: 1.22;
+    letter-spacing: -0.7px;
+    margin: 0 0 24px;
+}
+
+.sbe-welcome-content h2 span {
+    color: #e4dcff;
+}
+
+.sbe-welcome-content p {
+    color: #ecf0ff;
+    font-size: 15px;
+    line-height: 1.9;
+    max-width: 640px;
+    margin: 0 0 13px;
+}
+
+.sbe-welcome-description {
+    color: #d9e1fb !important;
+}
+
+.sbe-welcome-footer {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.sbe-welcome-footer i {
+    color: #c5d9ff;
+    font-size: 18px;
+}
+
+/* Logo institucional */
+
+.sbe-welcome-visual {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    min-width: 0;
+    z-index: 1;
+}
+
+.sbe-logo-glow {
+    position: absolute;
+    width: 310px;
+    height: 310px;
+    border-radius: 50%;
+    background: rgba(191, 178, 255, 0.16);
+    filter: blur(40px);
+    pointer-events: none;
+}
+
+.sbe-logo-frame {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 340px;
+    min-height: 245px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 28px;
+    box-shadow: 0 20px 45px rgba(10, 17, 50, 0.24);
+    transform: rotate(2deg);
+    transition: transform 0.3s ease;
+}
+
+.sbe-logo-frame:hover {
+    transform: rotate(0deg) translateY(-5px);
+}
+
+.sbe-logo-frame img {
+    display: block;
+    width: 100%;
+    max-height: 200px;
+    -o-object-fit: contain;
+       object-fit: contain;
+}
+
+.sbe-visual-caption {
+    color: #e6e7fc;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.3px;
+}
+
+/* Adaptación para tabletas */
+
+@media (max-width: 1100px) {
+    .sbe-welcome {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 42px 36px;
+    }
+
+    .sbe-welcome-visual {
+        max-width: 420px;
+        width: 100%;
+        justify-self: center;
+    }
+}
+
+/* Adaptación para móviles */
+
+@media (max-width: 600px) {
+    .sbe-welcome {
+        padding: 32px 22px;
+        border-radius: 20px;
+        min-height: auto;
+    }
+
+    .sbe-welcome-content h2 {
+        font-size: 29px;
+    }
+
+    .sbe-welcome-content p {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .sbe-welcome-badge {
+        font-size: 11px;
+    }
+
+    .sbe-welcome-footer {
+        font-size: 12px;
+    }
+
+    .sbe-logo-frame {
+        max-width: 270px;
+        min-height: 190px;
+        padding: 22px;
+    }
+}

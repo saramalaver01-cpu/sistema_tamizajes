@@ -230,7 +230,7 @@ Route::middleware('estudiante')->group(function () {
 // Formulario de inicio de sesión
 Route::get('/login', [
     AccessController::class, 'show'
-])->name('login')->middleware('guest');
+])->name('login');
 
 // Inicio de sesión de estudiantes
 Route::post('/login/estudiante', [

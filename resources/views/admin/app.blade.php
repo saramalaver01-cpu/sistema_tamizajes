@@ -60,11 +60,7 @@
                     Administradores
                 </a>
 
-                <a href="#" class="admin-nav-link disabled">
-                    <i class="fa-solid fa-gear"></i>
-                    Configuración
-                    <span class="admin-nav-soon">Próx.</span>
-                </a>
+
 
             </nav>
 
