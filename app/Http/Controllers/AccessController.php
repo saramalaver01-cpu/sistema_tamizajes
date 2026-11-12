@@ -81,6 +81,8 @@ class AccessController extends Controller
                     'registro_pendiente_inicial' => $inicial,
                 ]);
 
+
+
                 return redirect()->route('registro.estudiante');
     }
 
